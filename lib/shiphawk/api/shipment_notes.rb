@@ -7,26 +7,14 @@ module Shiphawk
     #
     # The following API actions provide the CRUD interface to managing a company.
     #
-    module Company
+    module ShipmentNotes
 
-      def company_index
-
+      def shipment_notes_show shipment_id
+        get_request notes_path(shipment_id), {}
       end
 
-      def company_show
-
-      end
-
-      def company_create
-
-      end
-
-      def company_update
-
-      end
-
-      def company_destroy
-
+      def shipment_notes_update shipment_id, options
+        put_request notes_path(shipment_id), options
       end
 
     end

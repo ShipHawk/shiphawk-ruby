@@ -1,8 +1,6 @@
 module Shiphawk
 
   class << self
-    attr_accessor :api_key
-
     # config/initializers/shiphawk.rb (for instance)
     #
     # ```ruby

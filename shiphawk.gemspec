@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'faraday'
   spec.add_dependency 'faraday_middleware'
+  spec.add_dependency 'faraday-conductivity'
   spec.add_dependency 'httpclient'
   spec.add_dependency 'typhoeus'
   spec.add_dependency 'em-http-request'

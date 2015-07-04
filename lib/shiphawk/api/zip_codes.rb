@@ -14,7 +14,7 @@ module Shiphawk
       end
 
       def zip_codes_search options
-        entity_request_with_options zip_codes_path('autocomplete'), q: options.fetch(:q, '')
+        entity_request_with_options zip_codes_path('search'), q: options.fetch(:q, '')
       end
 
     end

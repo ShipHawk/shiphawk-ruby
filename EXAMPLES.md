@@ -6,10 +6,11 @@ Here's an example of authenticating with the Shiphawk::Client API
 
 ```ruby
 require 'rubygems'
-require 'shiphawk-client'
+require 'shiphawk-ruby'
 
-# get your api keys at https://shiphawk.com/dashboard/api_keys
+# get an item based on item id
 client = Shiphawk::Client.new('api_token')
+client.items_show 2335
 ```
 
 ## Users

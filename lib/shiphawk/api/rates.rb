@@ -11,12 +11,12 @@ module Shiphawk
 
       # Retrieve rates using a Rates ID key
       def rates_show rate_id
-        entity_request_with_id rates_path, id: rate_id
+        entity_request_with_id rates_path, rate_id
       end
 
       # Obtain rates given a source
       def rates_create options
-
+        post_request rates_path, options
       end
 
     end

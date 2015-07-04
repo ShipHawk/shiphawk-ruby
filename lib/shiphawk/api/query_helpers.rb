@@ -3,14 +3,6 @@ module Shiphawk
 
     module QueryHelpers
 
-      def api_keys_path sub_path=nil
-        "api_keys/#{sub_path}"
-      end
-
-      def company_path sub_path=nil
-        "company/#{sub_path}"
-      end
-
       def items_path sub_path=nil
         "items/#{sub_path}"
       end
@@ -19,8 +11,20 @@ module Shiphawk
         "rates/#{sub_path}"
       end
 
+      def notes_path id
+        shipments_path "#{id}/notes"
+      end
+
+      def tracking_path id
+        shipments_path "#{id}/tracking"
+      end
+
       def shipments_path sub_path=nil
         "shipments/#{sub_path}"
+      end
+
+      def status_path id
+        shipments_path "status"
       end
 
       def zip_codes_path sub_path=nil
@@ -31,7 +35,7 @@ module Shiphawk
         page = 1
         entities = []
         loop do
-          response = get_request path, {page: page, per_page: count, api_key: self.api_token}
+          response = get_request path, {page: page, per_page: count, api_token: self.api_token}
           entities << response.body
           entities = entities.flatten
           break if entities.size >= response.headers['X-Total'].to_i
@@ -41,7 +45,7 @@ module Shiphawk
       end
 
       def entity_request_with_id path, id
-        get_request path, id: id
+        get_request "#{path}#{id}", {}
       end
 
       def entity_request_with_options path, options

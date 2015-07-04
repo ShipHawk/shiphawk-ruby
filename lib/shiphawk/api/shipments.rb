@@ -9,20 +9,28 @@ module Shiphawk
     #
     module Shipments
 
-      def shipments_show
-
+      def shipments_show shipment_id
+        entity_request_with_id shipments_path, shipment_id
       end
 
-      def shipments_create
-
+      def shipments_bol shipment_id
+        get_request shipments_path("#{shipment_id}/bol")
       end
 
-      def shipments_update
-
+      def shipments_bol_pdf shipment_id
+        get_request shipments_path("#{shipment_id}/bol.pdf")
       end
 
-      def shipments_destroy
+      def shipments_create options
+        post_request shipments_path, options
+      end
 
+      def shipments_update shipment_id, options
+        put_request shipments_path(shipment_id), options
+      end
+
+      def shipments_destroy shipment_id
+        delete_request shipments_path, id: shipment_id
       end
 
     end

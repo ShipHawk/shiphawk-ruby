@@ -13,12 +13,12 @@ module Shiphawk
         collection_request items_path, 500
       end
 
-      def items_show options
-        entity_request_with_id items_path, id: options[:id]
+      def items_show item_id
+        entity_request_with_id items_path, item_id
       end
 
       def items_search options
-        entity_request_with_options items_path('autocomplete'), q: options.fetch(:q, '')
+        entity_request_with_options items_path('search'), q: options.fetch(:q, '')
       end
 
     end
