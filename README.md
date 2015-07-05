@@ -7,7 +7,7 @@ Ruby wrapper for the ShipHawk V3 API. The ShipHawk::Client gem provides an easy-
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'shiphawk-client'
+gem 'shiphawk-ruby'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install shiphawk-client
+    $ gem install shiphawk-ruby
 
 ## Usage
 

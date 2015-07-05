@@ -1,19 +1,32 @@
 # Shiphawk::Client Gem Examples
 
-## API Key Authentication
+## API Keys
 
-Here's an example of authenticating with the Shiphawk::Client API
+## Item retrieval and searching
+
+Here's an example of retrieving an Item given the Item ID using the Shiphawk::Client API
 
 ```ruby
-require 'rubygems'
-require 'shiphawk-ruby'
-
-# get an item based on item id
-client = Shiphawk::Client.new('api_token')
-client.items_show 2335
+    require 'rubygems'
+    require 'shiphawk-ruby'
+    
+    # get an item based on item id
+    client = Shiphawk::Client.new(api_token: 'api_token')
+    client.items_show 2335
 ```
 
-## Users
+## Notifications
 
-Here are some examples of accessing and managing user information:
+## Products
 
+## Rates
+
+## Shipment Notes
+
+## Shipment Tracking
+
+## Shipments
+
+## Shipments Status
+
+## Zip Codes
