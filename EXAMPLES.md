@@ -24,7 +24,9 @@ Shiphawk::Client initialize takes a parameter hash to configure a connection. Th
     @adapter = @options.delete(:adapter) { |key| Faraday.default_adapter }
 ```
 
-## Item retrieval and searching
+## Items retrieval and searching
+
+### Item retrieval
 
 Here's an example of retrieving an Item given the Item ID using the Shiphawk::Client API
 
