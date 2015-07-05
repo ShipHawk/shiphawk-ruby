@@ -18,10 +18,10 @@ module Shiphawk
 
     def initialize(options={api_token: Shiphawk.api_token})
       @options = options
-      @api_token = options.delete(:api_token) { |key| Shiphawk.api_token }
-      @api_version = options.delete(:api_version) { |key| DEFAULT_API_VERSION }
-      @host_url = options.delete(:host_url) { |key| PRODUCTION_API_HOST }
-      @adapter = options.delete(:adapter) { |key| Faraday.default_adapter }
+      @api_token = @options.delete(:api_token) { |key| Shiphawk.api_token }
+      @api_version = @options.delete(:api_version) { |key| DEFAULT_API_VERSION }
+      @host_url = @options.delete(:host_url) { |key| PRODUCTION_API_HOST }
+      @adapter = @options.delete(:adapter) { |key| Faraday.default_adapter }
     end
 
   end
