@@ -10,7 +10,7 @@ module Shiphawk
     module ShipmentTracking
 
       def shipments_status_show shipment_id
-        get_request tracking_path(shipment_id)
+        get_request tracking_path(shipment_id), {}
       end
 
       def shipments_status_update shipment_id, options

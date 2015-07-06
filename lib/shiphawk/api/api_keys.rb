@@ -9,10 +9,9 @@ module Shiphawk
     #
     module ApiKeys
 
-      #
-      # Get all API keys for a company
+      # Get all API keys for an account using an API key
       def api_keys_index
-        get_request api_keys_path
+        get_request api_keys_path, {}
       end
 
     end

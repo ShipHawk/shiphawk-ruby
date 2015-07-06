@@ -7,6 +7,14 @@ module Shiphawk
         "items/#{sub_path}"
       end
 
+      def categories_path sub_path=nil
+        "categories/#{sub_path}"
+      end
+
+      def products_path sub_path=nil
+        "products/#{sub_path}"
+      end
+
       def rates_path sub_path=nil
         "rates/#{sub_path}"
       end

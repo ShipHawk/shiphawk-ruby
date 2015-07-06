@@ -9,16 +9,20 @@ module Shiphawk
     #
     module Shipments
 
+      def shipments_index
+        collection_request shipments_path, 500
+      end
+
       def shipments_show shipment_id
         entity_request_with_id shipments_path, shipment_id
       end
 
       def shipments_bol shipment_id
-        get_request shipments_path("#{shipment_id}/bol")
+        get_request shipments_path("#{shipment_id}/bol"), {}
       end
 
       def shipments_bol_pdf shipment_id
-        get_request shipments_path("#{shipment_id}/bol.pdf")
+        get_request shipments_path("#{shipment_id}/bol.pdf"), {}
       end
 
       def shipments_create options

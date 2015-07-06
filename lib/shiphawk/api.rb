@@ -6,6 +6,8 @@ module Shiphawk
     # load dependent code
     autoload :QueryHelpers,     'shiphawk/api/query_helpers'
     autoload :Items,            'shiphawk/api/items'                # get /, get /search, get /:id
+    autoload :Categories,       'shiphawk/api/categories'           # get /, get /:id, post /, put /, delete /
+    autoload :Products,         'shiphawk/api/products'             # get /:id, post /, put /, delete /
     autoload :Rates,            'shiphawk/api/rates'                # get :id, post /
     autoload :ShipmentNotes,    'shiphawk/api/shipment_notes'       # get /:id/notes, post /:id/notes
     autoload :ShipmentTracking, 'shiphawk/api/shipment_tracking'    # get /:id/tracking, put /:id/tracking
