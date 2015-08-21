@@ -4,7 +4,7 @@ module Shiphawk
     # config/initializers/shiphawk.rb (for instance)
     #
     # ```ruby
-    # ShiphawkClient.configure do |config|
+    # Shiphawk.configure do |config|
     #   config.token = 'api_token'
     # end
     # ```
@@ -18,6 +18,7 @@ module Shiphawk
       true
     end
 
+    attr_accessor :api_token, :sandbox
   end
 
   autoload :Api,     'shiphawk/api'
