@@ -31,7 +31,7 @@ module Shiphawk
         "shipments/#{sub_path}"
       end
 
-      def status_path id
+      def status_path
         shipments_path "status"
       end
 
