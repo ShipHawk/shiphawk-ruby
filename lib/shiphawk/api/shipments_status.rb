@@ -9,8 +9,8 @@ module Shiphawk
     #
     module ShipmentsStatus
 
-      def shipments_status_update shipment_id, options
-        put_request status_path(shipment_id), options
+      def shipments_status_update options
+        put_request status_path, options
       end
 
     end

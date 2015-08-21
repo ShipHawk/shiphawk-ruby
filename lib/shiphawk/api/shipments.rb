@@ -34,7 +34,7 @@ module Shiphawk
       end
 
       def shipments_destroy shipment_id
-        delete_request shipments_path, id: shipment_id
+        delete_request shipments_path(shipment_id), {}
       end
 
     end
