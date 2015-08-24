@@ -21,7 +21,7 @@ module Shiphawk
           conn = get_connection
           response = conn.send(verb, "#{API_PATH}#{api_version}/#{endpoint}", params)
           raise_errors response
-          response
+          response.body
         end
       end
 
