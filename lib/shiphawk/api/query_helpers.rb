@@ -35,6 +35,14 @@ module Shiphawk
         shipments_path "status"
       end
 
+      def notifications_path sub_path=nil
+        "notifications/#{sub_path}"
+      end
+
+      def catalog_sale_path
+        notifications_path "catalog_sale"
+      end
+
       def zip_codes_path sub_path=nil
         "zip_codes/#{sub_path}"
       end

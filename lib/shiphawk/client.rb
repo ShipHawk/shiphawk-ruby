@@ -14,6 +14,7 @@ module Shiphawk
     include Shiphawk::Api::Shipments
     include Shiphawk::Api::ShipmentsStatus
     include Shiphawk::Api::ZipCodes
+    include Shiphawk::Api::Notifications
 
     attr_reader :api_token, :options, :sandbox
 
