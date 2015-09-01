@@ -14,7 +14,7 @@ module Shiphawk
     autoload :Shipments,        'shiphawk/api/shipments'            # get /, get :id, get :id/bol, get :id/bol.pdf, post /, put :id, delete :id
     autoload :ShipmentsStatus,  'shiphawk/api/shipments_status'     # put /
     autoload :ZipCodes,         'shiphawk/api/zip_codes'            # get /, get /search
-    autoload :Notifications,    'shiphawk/api/Notifications'        # post /
+    autoload :Notifications,    'shiphawk/api/notifications'        # post /
 
   end
 end
