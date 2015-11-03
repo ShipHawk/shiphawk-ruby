@@ -7,7 +7,7 @@ Ruby wrapper for the ShipHawk V3 API. The ShipHawk::Client gem provides an easy-
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'shiphawk-ruby'
+gem 'shiphawk'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install shiphawk-ruby
+    $ gem install shiphawk
 
 ## Usage
 
@@ -39,4 +39,4 @@ When an *error status* is received from the server, the gem will raise an error 
 
 ## Copyright
 
-Copyright (c) 2015 HAWK Applications Inc., [Robert Schmitt](bob@shiphawk.com). See LICENSE for details.
+Copyright (c) 2015 Hawk Applications Corp. See LICENSE for details.

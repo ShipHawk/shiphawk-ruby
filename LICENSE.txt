@@ -1,4 +1,4 @@
-Copyright (c) 2015 Robert Schmitt
+Copyright (c) 2015 Hawk Applications Corp.
 
 MIT License
 

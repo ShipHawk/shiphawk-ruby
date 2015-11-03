@@ -1,0 +1,5 @@
+=== 0.8.1 2015-11-03
+
+* Remove .gem file from repo (it's redundant and could get out of sync with the releases).
+* Fix README and EXAMPLES from referencing shiphawk-ruby to just shiphawk.
+* Fix copyright.

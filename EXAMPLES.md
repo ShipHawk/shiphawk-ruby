@@ -6,7 +6,7 @@ To make a connection to a ShipHawk server, create a Client connection:
 
 ```ruby
     require 'rubygems'
-    require 'shiphawk-ruby'
+    require 'shiphawk'
 
     # get an item based on item id
     client = Shiphawk::Client.new(api_token: 'api_token')
@@ -32,7 +32,7 @@ Here's an example of retrieving an Item given the Item ID using the Shiphawk::Cl
 
 ```ruby
     require 'rubygems'
-    require 'shiphawk-ruby'
+    require 'shiphawk'
 
     # get an item based on item id
     client = Shiphawk::Client.new(api_token: 'api_token')
@@ -45,7 +45,7 @@ Currently undocumented on Shiphawk's api guide, so please disregard for now.
 
 ```ruby
     require 'rubygems'
-    require 'shiphawk-ruby'
+    require 'shiphawk'
 
     # get an item based on item id
     client = Shiphawk::Client.new(api_token: 'api_token')
@@ -57,7 +57,7 @@ Implemented but undocumented. Not sure how this is supposed to work.
 
 ```ruby
     require 'rubygems'
-    require 'shiphawk-ruby'
+    require 'shiphawk'
 
     # get an item based on item id
     client = Shiphawk::Client.new(api_token: 'api_token')
@@ -70,7 +70,7 @@ Get a shipping quote. Documentation here: https://shiphawk.com/api-docs#!/rates/
 Creating a quote
 ```ruby
     require 'rubygems'
-    require 'shiphawk-ruby'
+    require 'shiphawk'
 
     client = Shiphawk::Client.new(api_token: 'api_token')
 
@@ -90,7 +90,7 @@ Create customer note about a shipment
 
 ```ruby
     require 'rubygems'
-    require 'shiphawk-ruby'
+    require 'shiphawk'
 
     Shiphawk.notes_update(shipment_id, {body: "This is a classy note"})
 ```
@@ -101,7 +101,7 @@ Subscribe to tracking notifications for a shipment.
 
 ```ruby
     require 'rubygems'
-    require 'shiphawk-ruby'
+    require 'shiphawk'
 
     Shiphawk.shipments_status_update(shipment_id, {callback_url:  "www.someawesomecallback.com/shipment-tracking-callback/#{shipment_id}"})
 ```
@@ -112,7 +112,7 @@ Create a shipment
 
 ```ruby
     require 'rubygems'
-    require 'shiphawk-ruby'
+    require 'shiphawk'
 
     data = {
       xid: buyer_invoice.to_s,
@@ -140,7 +140,7 @@ Update a number of shipments at once (need to confirm)
 
 ```ruby
     require 'rubygems'
-    require 'shiphawk-ruby'
+    require 'shiphawk'
     Shiphawk.shipments_status_update({shipment_ids: [1,2,3], status: "in_transit"})
 ```
 
@@ -150,6 +150,6 @@ Get all zip codes using pagination.
 
 ```ruby
     require 'rubygems'
-    require 'shiphawk-ruby'
+    require 'shiphawk'
     Shiphawk.zip_codes_index
 ```
