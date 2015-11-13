@@ -6,8 +6,6 @@ module Shiphawk
 
     module Request
 
-      APP_VERSION = IO.popen(['git', 'rev-parse', 'HEAD', :chdir => Rails.root]).read.chomp
-
       DEFAULT_HEADERS = {
           'x-li-format' => 'json'
       }
@@ -27,17 +25,44 @@ module Shiphawk
 
       private
 
+      def app_version
+        if ENV["APP_VERSION"]
+          ENV["APP_VERSION"]
+        elsif has_git? && rails_under_git?
+          IO.popen(['git', 'rev-parse', 'HEAD', :chdir => Rails.root]).read.chomp
+        else
+          '0'
+        end
+      end
+
+      def has_git?
+        IO.popen(['which', 'git']).read.chomp.length > 0
+      end
+
+      def rails_under_git?
+        return false unless defined?(Rails)
+        File.exists? (Rails.root + ".git")
+      end
+
+      def app_logger
+        if defined? Rails
+          Rails.logger
+        end
+      end
+
       def get_connection
         raise ArgumentError, 'Incorrect connection information' if host_url.nil? || adapter.nil?
         @connection ||= Faraday.new(url: host_url) do |conn|
           conn.request :multipart
           conn.request :url_encoded
 
-          conn.request :user_agent, app: 'ShipHawk Client', version: APP_VERSION
+          conn.request :user_agent, app: 'ShipHawk Client', version: app_version
           conn.request :request_id
           conn.request :request_headers, accept: 'application/json', 'X-API-KEY' => api_token
 
-          conn.use :extended_logging, logger: Rails.logger
+          if app_logger
+            conn.use :extended_logging, logger: app_logger
+          end
 
           conn.response :json, content_type: /\bjson$/
 
