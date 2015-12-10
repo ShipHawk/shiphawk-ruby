@@ -41,8 +41,6 @@ Here's an example of retrieving an Item given the Item ID using the Shiphawk::Cl
 
 ## Notifications
 
-Currently undocumented on Shiphawk's api guide, so please disregard for now.
-
 ```ruby
     require 'rubygems'
     require 'shiphawk'
@@ -52,8 +50,6 @@ Currently undocumented on Shiphawk's api guide, so please disregard for now.
 ```
 
 ## Products
-
-Implemented but undocumented. Not sure how this is supposed to work.
 
 ```ruby
     require 'rubygems'
