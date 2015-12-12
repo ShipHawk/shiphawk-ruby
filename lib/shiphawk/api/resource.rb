@@ -12,11 +12,8 @@ module ShipHawk
         if self.class_name == 'resource'
           raise NotImplementedError.new('Resource is an abstract class to perform generic actions on its subclasses (Address, Shipment, etc.)')
         end
-        if self.class_name[-1..-1] == 's' || self.class_name[-1..-1] == 'h'
-          return "/#{CGI.escape(self.class_name.downcase)}es"
-        else
-          return "/#{CGI.escape(class_name.downcase)}s"
-        end
+
+        "/#{CGI.escape(self.class_name.downcase)}"
       end
 
       def url
@@ -63,7 +60,7 @@ module ShipHawk
 
           for key in @unsaved_values
             value = values[key]
-            if value.is_a?(ShipHawk::ShipHawkObject)
+            if value.is_a?(ShipHawk::Api::ShipHawkObject)
               values[key] = value.flatten_unsaved
             end
           end

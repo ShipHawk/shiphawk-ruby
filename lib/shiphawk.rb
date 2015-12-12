@@ -62,19 +62,19 @@ module ShipHawk
     api_key ||= @@api_key
     raise Error.new('No API key provided.') unless api_key
 
-    params = Util.objects_to_ids(params)
+    params = ShipHawk::Helpers::Util.objects_to_ids(params)
     url = self.api_url(url)
     case method.to_s.downcase.to_sym
       when :get, :head, :delete
         # Make params into GET parameters
         if params && params.count > 0
-          query_string = Util.flatten_params(params).collect{|key, value| "#{key}=#{Util.url_encode(value)}"}.join('&')
+          query_string = ShipHawk::Helpers::Util.flatten_params(params).collect{|key, value| "#{key}=#{ShipHawk::Helpers::Util.url_encode(value)}"}.join('&')
           url += "#{URI.parse(url).query ? '&' : '?'}#{query_string}" + '&api_key=' + api_key
           puts url
         end
         payload = nil
       else
-        payload = Util.flatten_params(params).collect{|(key, value)| "#{key}=#{Util.url_encode(value)}"}.join('&')
+        payload = ShipHawk::Helpers::Util.flatten_params(params).collect{|(key, value)| "#{key}=#{ShipHawk::Helpers::Util.url_encode(value)}"}.join('&')
     end
 
     headers = {
@@ -123,4 +123,11 @@ module ShipHawk
 
     return [response_json, api_key]
   end
+
+  private
+
+  def self.execute_request(opts)
+    RestClient::Request.execute(opts)
+  end
+
 end

@@ -8,10 +8,10 @@ module ShipHawk
     # The following API actions provide the CRUD interface to manage addresses.
     #
 
-    class Address < Resource
+    class Addresses < Resource
 
       def self.search(params={})
-        response, api_key = ShipHawk.request(:get, '/addresses/search', api_key, params)
+        response, api_key = ShipHawk.request(:get, '/addresses/search', @api_key, params)
         ShipHawk::Helpers::Util::convert_to_ShipHawk_object(response, api_key) if response
       end
 

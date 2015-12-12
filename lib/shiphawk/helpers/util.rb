@@ -3,7 +3,7 @@ module ShipHawk
     module Util
       def self.objects_to_ids(obj)
         case obj
-          when Resource
+          when ShipHawk::Api::Resource
             return {:id => obj.id}
           when Hash
             result = {}
@@ -18,22 +18,22 @@ module ShipHawk
       end
 
       def self.convert_to_ShipHawk_object(response, api_key, parent=nil, name=nil)
-        types = {
-            'Address' => Address,
-            'Shipment' => Shipment,
-            'Rate' => Rate,
-            'Item' => Item,
-            'ZipCode' => ZipCode,
-            'NetworkLocation' => NetworkLocation,
-            'Dispatch' => Dispatch,
-            'Public' => Public,
-        }
+        # types = {
+        #     'Addresses' => Addresses,
+        #     'Shipments' => Shipments,
+        #     'Rates' => Rates,
+        #     'Items' => Items,
+        #     'ZipCodes' => ZipCodes,
+        #     'NetworkLocations' => NetworkLocations,
+        #     'Dispatches' => Dispatches,
+        #     'Public' => Public,
+        # }
 
         case response
           when Array
             response.map { |i| convert_to_ShipHawk_object(i, api_key, parent) }
           when Hash
-            ShipHawkObject.construct_from(response, api_key, parent, name)
+            ShipHawk::Api::ShipHawkObject.construct_from(response, api_key, parent, name)
           else
             response
         end

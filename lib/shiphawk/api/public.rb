@@ -15,7 +15,7 @@ module ShipHawk
       #         [ tracking_number ], string, required
 
       def self.shipment_tracking_info(params={})
-        response, api_key = ShipHawk.request(:get, '/public/track', api_key, params)
+        response, api_key = ShipHawk.request(:get, '/public/track', @api_key, params)
         ShipHawk::Helpers::Util::convert_to_ShipHawk_object(response, api_key) if response
       end
 
