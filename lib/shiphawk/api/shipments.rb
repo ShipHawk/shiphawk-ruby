@@ -1,4 +1,4 @@
-module Shiphawk
+module ShipHawk
   module Api
 
     # Shipments API
