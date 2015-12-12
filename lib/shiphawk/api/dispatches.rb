@@ -17,7 +17,7 @@ module ShipHawk
       #         [ instructions ], string optional
 
       def self.create_dispatch(params={})
-        response, api_key = ShipHawk.request(:post, '/dispatches', @api_key, params)
+        response, api_key = ShipHawk::Client.request(:post, '/dispatches', @api_key, params)
         ShipHawk::Helpers::Util::convert_to_ShipHawk_object(response, api_key) if response
       end
     end

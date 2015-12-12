@@ -24,13 +24,13 @@ module ShipHawk
       end
 
       def refresh
-        response, api_key = ShipHawk.request(:get, url, @api_key, @retrieve_options)
+        response, api_key = ShipHawk::Client::request(:get, url, @api_key, @retrieve_options)
         refresh_from(response, api_key)
         self
       end
 
       def self.all(filters={}, api_key=nil)
-        response, api_key = ShipHawk.request(:get, url, api_key, filters)
+        response, api_key = ShipHawk::Client::request(:get, url, api_key, filters)
         ShipHawk::Helpers::Util.convert_to_ShipHawk_object(response, api_key)
       end
 
@@ -42,13 +42,13 @@ module ShipHawk
 
       def self.create(params={}, api_key=nil)
         wrapped_params = {}
-        wrapped_params[self.class_name().to_sym] = params
-        response, api_key = ShipHawk.request(:post, self.url, api_key, wrapped_params)
+        wrapped_params[self.class_name.to_sym] = params
+        response, api_key = ShipHawk::Client::request(:post, self.url, api_key, wrapped_params)
         ShipHawk::Helpers::Util.convert_to_ShipHawk_object(response, api_key)
       end
 
       def delete
-        response, api_key = ShipHawk.request(:delete, url, @api_key)
+        response, api_key = ShipHawk::Client::request(:delete, url, @api_key)
         refresh_from(response, api_key)
         self
       end
@@ -67,7 +67,7 @@ module ShipHawk
 
           wrapped_params = {self.class.class_name => values}
 
-          response, api_key = ShipHawk.request(:put, url, @api_key, wrapped_params)
+          response, api_key = ShipHawk::Client::request(:put, url, @api_key, wrapped_params)
           refresh_from(response, api_key)
         end
         self

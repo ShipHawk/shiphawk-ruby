@@ -23,14 +23,14 @@ module ShipHawk
       # create a new set of standard rates
 
       def self.create_standard_rates(params={})
-        response, api_key = ShipHawk.request(:post, '/rates/standard', @api_key, params)
+        response, api_key = ShipHawk::Client.request(:post, '/rates/standard', @api_key, params)
         ShipHawk::Helpers::Util::convert_to_ShipHawk_object(response, api_key) if response
       end
 
       #get rates for vehicle transportation
 
       def self.get_vehicle_rates(params={})
-        response, api_key = ShipHawk.request(:get, '/rates/vehicle', @api_key, params)
+        response, api_key = ShipHawk::Client.request(:get, '/rates/vehicle', @api_key, params)
         ShipHawk::Helpers::Util::convert_to_ShipHawk_object(response, api_key) if response
       end
 

@@ -11,7 +11,7 @@ module ShipHawk
     class ZipCodes < Resource
 
       def self.search(params={})
-        response, api_key = ShipHawk.request(:get, '/zip_codes/search', @api_key, params)
+        response, api_key = ShipHawk::Client::request(:get, '/zip_codes/search', @api_key, params)
         ShipHawk::Helpers::Util::convert_to_ShipHawk_object(response, api_key) if response
       end
 

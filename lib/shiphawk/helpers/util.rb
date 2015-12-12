@@ -1,7 +1,8 @@
 module ShipHawk
   module Helpers
     module Util
-      def self.objects_to_ids(obj)
+      extend self
+      def objects_to_ids(obj)
         case obj
           when ShipHawk::Api::Resource
             return {:id => obj.id}
@@ -17,17 +18,7 @@ module ShipHawk
         end
       end
 
-      def self.convert_to_ShipHawk_object(response, api_key, parent=nil, name=nil)
-        # types = {
-        #     'Addresses' => Addresses,
-        #     'Shipments' => Shipments,
-        #     'Rates' => Rates,
-        #     'Items' => Items,
-        #     'ZipCodes' => ZipCodes,
-        #     'NetworkLocations' => NetworkLocations,
-        #     'Dispatches' => Dispatches,
-        #     'Public' => Public,
-        # }
+      def convert_to_ShipHawk_object(response, api_key, parent=nil, name=nil)
 
         case response
           when Array
@@ -39,7 +30,7 @@ module ShipHawk
         end
       end
 
-      def self.symbolize_names(obj)
+      def symbolize_names(obj)
         case obj
           when Hash
             result = {}
@@ -55,11 +46,11 @@ module ShipHawk
         end
       end
 
-      def self.url_encode(key)
+      def url_encode(key)
         URI.escape(key.to_s, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
       end
 
-      def self.flatten_params(params, parent_key=nil)
+      def flatten_params(params, parent_key=nil)
         result = []
         if params.is_a?(Hash)
           params.each do |k, v|
