@@ -9,7 +9,7 @@ module ShipHawk
 
       def self.url
         if self.class_name == 'resource'
-          raise NotImplementedError.new('Resource is an abstract class ot perform actions on its subclasses (Address, Shipment, etc.)')
+          raise NotImplementedError.new('Resource is an abstract class to perform generic actions on its subclasses (Address, Shipment, etc.)')
         end
         if(self.class_name[-1..-1] == 's' || self.class_name[-1..-1] == 'h')
           return "/#{CGI.escape(self.class_name.downcase)}es"
