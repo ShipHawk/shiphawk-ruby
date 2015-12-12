@@ -1,5 +1,6 @@
 module ShipHawk
   module Api
+
     class NetworkLocation < Resource
 
       # create a network location and add it to allowed affiliates

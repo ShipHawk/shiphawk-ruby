@@ -1,5 +1,6 @@
 module ShipHawk
   module Api
+
     class Resource < ShipHawkObject
       def self.class_name
         camel = self.name.split('::')[-1]

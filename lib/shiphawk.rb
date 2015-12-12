@@ -1,3 +1,9 @@
+require 'cgi'
+require 'set'
+require 'openssl'
+require 'rest_client'
+require 'multi_json'
+
 # Resources
 require 'shiphawk/version'
 require 'shiphawk/util'

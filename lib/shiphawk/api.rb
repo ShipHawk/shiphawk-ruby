@@ -1,4 +1,5 @@
 require 'shiphawk/api/object'
+require 'shiphawk/api/resource'
 require 'shiphawk/api/address'
 require 'shiphawk/api/shipments'
 require 'shiphawk/api/rates'
