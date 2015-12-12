@@ -23,18 +23,10 @@ module ShipHawk
             'Shipment' => Shipment,
             'Rate' => Rate,
             'Item' => Item,
-            'Container' => Container,
-            'Pickup' => Pickup,
-            'PickupRate' => PickupRate,
-            'PostageLabel' => PostageLabel,
-            'Printer' => Printer,
-            'PrintJob' => PrintJob,
-            'CarrierAccount' => CarrierAccount,
             'ZipCode' => ZipCode,
             'NetworkLocation' => NetworkLocation,
             'Dispatch' => Dispatch,
             'Public' => Public,
-            'User' => User
         }
 
         case response

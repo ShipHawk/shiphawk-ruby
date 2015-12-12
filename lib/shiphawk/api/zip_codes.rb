@@ -1,4 +1,4 @@
-module Shiphawk
+module ShipHawk
   module Api
 
     # Zip Codes API
@@ -7,14 +7,11 @@ module Shiphawk
     #
     # The following API actions provide the CRUD interface to managing zip codes.
     #
-    module ZipCodes
+    class ZipCodes < Resource
 
-      def zip_codes_index
-        collection_request zip_codes_path, 1000
-      end
-
-      def zip_codes_search options
-        entity_request_with_options zip_codes_path('search'), q: options.fetch(:q, '')
+      def self.search(params={}, api_key=nil)
+        response, api_key = ShipHawk.request(:get, '/zip_codes/search', api_key, params)
+        ShipHawk::Helpers::Util::convert_to_ShipHawk_object(response, api_key) if response
       end
 
     end
