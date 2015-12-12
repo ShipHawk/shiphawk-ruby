@@ -7,18 +7,23 @@ module Shiphawk
     #
     # The following API actions provide the CRUD interface to managing items.
     #
-    module Items
+    class Items < Resource
 
-      def items_index
-        collection_request items_path, 500
+      def self.search(params={})
+        response, api_key = ShipHawk.request(:get, '/items/search', api_key, params)
+        ShipHawk::Helpers::Util::convert_to_ShipHawk_object(response, api_key) if response
       end
 
-      def items_show item_id
-        entity_request_with_id items_path, item_id
-      end
-
-      def items_search options
-        entity_request_with_options items_path('search'), q: options.fetch(:q, '')
+      def self.create_item_object(l,w,h,lbs,id,packed,value)
+        {
+            "length" => l,
+            "width" => w,
+            "height" => h,
+            "weight" => lbs,
+            "packed" => packed,
+            "id" => id.to_s,
+            "value" => value
+        }
       end
 
     end
