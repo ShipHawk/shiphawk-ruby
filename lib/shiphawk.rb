@@ -6,7 +6,6 @@ require 'multi_json'
 
 # Resources
 require 'shiphawk/version'
-require 'shiphawk/util'
 require 'shiphawk/helpers'
 require 'shiphawk/api'
 require 'shiphawk/error'
