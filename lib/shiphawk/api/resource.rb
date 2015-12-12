@@ -12,7 +12,7 @@ module ShipHawk
         if self.class_name == 'resource'
           raise NotImplementedError.new('Resource is an abstract class to perform generic actions on its subclasses (Address, Shipment, etc.)')
         end
-        if(self.class_name[-1..-1] == 's' || self.class_name[-1..-1] == 'h')
+        if self.class_name[-1..-1] == 's' || self.class_name[-1..-1] == 'h'
           return "/#{CGI.escape(self.class_name.downcase)}es"
         else
           return "/#{CGI.escape(class_name.downcase)}s"
@@ -23,37 +23,37 @@ module ShipHawk
         unless self.id
           raise Error.new("Could not determine which URL to request: #{self.class} instance has invalid ID: #{self.id.inspect}")
         end
-        return "#{self.class.url}/#{CGI.escape(id)}"
+        "#{self.class.url}/#{CGI.escape(id)}"
       end
 
       def refresh
         response, api_key = ShipHawk.request(:get, url, @api_key, @retrieve_options)
         refresh_from(response, api_key)
-        return self
+        self
       end
 
       def self.all(filters={}, api_key=nil)
         response, api_key = ShipHawk.request(:get, url, api_key, filters)
-        return Util.convert_to_ShipHawk_object(response, api_key)
+        ShipHawk::Helpers::Util.convert_to_ShipHawk_object(response, api_key)
       end
 
       def self.retrieve(id, api_key=nil)
         instance = self.new(id, api_key)
         instance.refresh
-        return instance
+        instance
       end
 
       def self.create(params={}, api_key=nil)
         wrapped_params = {}
         wrapped_params[self.class_name().to_sym] = params
         response, api_key = ShipHawk.request(:post, self.url, api_key, wrapped_params)
-        return Util.convert_to_ShipHawk_object(response, api_key)
+        ShipHawk::Helpers::Util.convert_to_ShipHawk_object(response, api_key)
       end
 
       def delete
         response, api_key = ShipHawk.request(:delete, url, @api_key)
         refresh_from(response, api_key)
-        return self
+        self
       end
 
       def save
@@ -73,7 +73,7 @@ module ShipHawk
           response, api_key = ShipHawk.request(:put, url, @api_key, wrapped_params)
           refresh_from(response, api_key)
         end
-        return self
+        self
       end
     end
   end

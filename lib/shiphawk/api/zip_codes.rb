@@ -7,6 +7,7 @@ module ShipHawk
     #
     # The following API actions provide the CRUD interface to managing zip codes.
     #
+
     class ZipCodes < Resource
 
       def self.search(params={}, api_key=nil)

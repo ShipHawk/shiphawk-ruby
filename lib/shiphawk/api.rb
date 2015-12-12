@@ -9,7 +9,7 @@ require 'shiphawk/api/network_locations'
 require 'shiphawk/api/dispatch'
 require 'shiphawk/api/public'
 
-module Shiphawk
+module ShipHawk
   module Api
   end
 end

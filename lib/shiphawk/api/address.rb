@@ -1,6 +1,13 @@
 module ShipHawk
   module Api
 
+    # Address API
+    #
+    # @see https://shiphawk.com/api-docs
+    #
+    # The following API actions provide the CRUD interface to manage addresses.
+    #
+
     class Address < Resource
 
       def self.search(params={})

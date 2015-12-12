@@ -1,6 +1,13 @@
 module ShipHawk
   module Api
 
+    # Shipments API
+    #
+    # @see https://shiphawk.com/api-docs
+    #
+    # The following API actions provide the CRUD interface to public endpoints.
+    #
+
     class Public < Resource
 
       # retrieve tracking information for a specific shipment

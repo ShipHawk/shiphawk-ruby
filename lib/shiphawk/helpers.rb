@@ -1,6 +1,6 @@
 require 'shiphawk/helpers/util'
 
-module Shiphawk
+module ShipHawk
   module Helpers
   end
 end

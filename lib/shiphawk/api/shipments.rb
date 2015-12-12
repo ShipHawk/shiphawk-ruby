@@ -7,7 +7,8 @@ module ShipHawk
     #
     # The following API actions provide the CRUD interface to managing Shipments.
     #
-    module Shipments
+
+    class Shipments < Resource
 
       def self.create_shipment(params={})
         puts params

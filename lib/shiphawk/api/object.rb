@@ -64,11 +64,11 @@ module ShipHawk
         @values.values
       end
 
-      def to_json(options = {})
+      def to_json
         MultiJson.dump(@values)
       end
 
-      def as_json(options = {})
+      def as_json
         @values.as_json
       end
 
@@ -102,7 +102,7 @@ module ShipHawk
           end
         end
 
-        return values
+        values
       end
 
       def metaclass
@@ -132,7 +132,6 @@ module ShipHawk
 
               cur = self
               cur_parent = self.parent
-              param = {}
               while cur_parent
                 if cur.name
                   cur_parent.unsaved_values.add(cur.name)

@@ -1,6 +1,13 @@
 module ShipHawk
   module Api
 
+    # Dispatch API
+    #
+    # @see https://shiphawk.com/api-docs
+    #
+    # The following API actions provide the CRUD interface to manage dispatches.
+    #
+
     class Dispatch < Resource
 
       # create a dispatch

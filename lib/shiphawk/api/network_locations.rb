@@ -1,6 +1,13 @@
 module ShipHawk
   module Api
 
+    # NetworkLocations API
+    #
+    # @see https://shiphawk.com/api-docs
+    #
+    # The following API actions provide the CRUD interface to manage network locations.
+    #
+
     class NetworkLocation < Resource
 
       # create a network location and add it to allowed affiliates

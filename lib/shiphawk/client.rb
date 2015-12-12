@@ -1,4 +1,4 @@
-module Shiphawk
+module ShipHawk
   class Client
 
     PRODUCTION_API_HOST = 'https://shiphawk.com'
