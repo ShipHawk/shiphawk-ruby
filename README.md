@@ -90,7 +90,15 @@ For the sake of simplicity, we're only going to deal with 1 item here. And we're
 sofa = all_sofas.first
 ```
 
-Next we'll use the average dimensions returned with the database item. However, if you already know the dimensions of the package you're shipping, we recommend you use them instead for each of the variables below.
+Next, we to need put our item in a format that the API can understand. To speed things up, here's are two pre-populated item objects for you.
+
+```ruby
+big_sofa = {"length"=>80.0, "width"=>80.0, "height"=>60.0, "weight"=>10.0, "packed"=>false, "id"=>"1234", "value"=>10.0}
+ring = {"length"=>"0.0", "width"=>1.0, "height"=>1.0, "weight"=>0.0, "packed"=>false, "id"=>"126", "value"=>1000.0}
+
+```
+
+The longer way to create these items is via the `item_object` method. We can use the average dimensions returned with the database item. However, if you already know the dimensions of the package you're shipping, we recommend you use them instead for each of the variables below.
 
 ```ruby
 item_id = sofa['id']
@@ -102,7 +110,7 @@ packed  = false
 value   = 10
 ```
 
-This gives us enough information to create our first item object.
+This gives us enough information to create an item object.
 
 ```ruby
 sofa = ShipHawk::Api::Items.item_object(
@@ -118,10 +126,9 @@ sofa = ShipHawk::Api::Items.item_object(
 
 **Note:** Repeat this process for multiple items if you'd like.
 
-Finally, add your items to the `items_cart`.
+Finally, add your items to the `items_cart`. We're only going to use `big_sofa` from the previous step.
 ```ruby
-items_cart.push(sofa)
-items_cart.push(ring)
+items_cart.push(big_sofa)
 ```
 
 #### Step 5: Let's get Rates for the Items we want to ship.
