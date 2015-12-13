@@ -185,7 +185,7 @@ rate_id = selected_rate['id']
 Next, let's set the order email
 
 ```ruby
-order_email = biff.tannin@shiphawk.com
+order_email = "biff.tannin@shiphawk.com"
 ```
 
 Finally, we have everything we need to create a shipment. Cool.
