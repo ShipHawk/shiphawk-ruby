@@ -90,7 +90,7 @@ For the sake of simplicity, we're only going to deal with 1 item here. And we're
 sofa = all_sofas.first
 ```
 
-Next, we to need put our item in a format that the API can understand. To speed things up, here are two pre-populated item objects for you.
+Next, we need to put our item in a format that the API can understand. To speed things up, here are two pre-populated item objects for you.
 
 ```ruby
 big_sofa = {
