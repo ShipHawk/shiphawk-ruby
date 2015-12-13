@@ -33,16 +33,27 @@ ShipHawk::Client::api_key =  'YOUR_API_KEY'
 Example Usage
 ------------------
 
-In the following example, we're going to make it easy for you to test out our Ruby client and API endpoints. We'll be booking a shipment via the command line. Yes, it is entirely possible to get rates, book and track your shipments etc... from console. All you have to do is `cd` to the directory where you installed ```shiphawk-ruby```.
+In the following example, we're going to make it easy for you to test out our Ruby client and API endpoints. We'll be booking a shipment via the command line. Yes, it is entirely possible to get Rates, book and track your Shipments etc... from your console.
 
-Once inside the `shiphawk-ruby` directory, type:
+#### Step 1:  Clone the ShipHawk Ruby Client locally.
+
+First we'll clone the shiphawk-ruby repo to our local machine. At the command line, type:
+
+
+```
+git clone -b superior_branch --single-branch git@github.com:ShipHawk/shiphawk-ruby.git
+cd shiphawk-ruby
+bundle
+```
+
+You're now ready to enter the ShipHawk Interactive Ruby Shell. Type:
 
 ```ruby
 shiphawk-irb
 ```
-That's it. Now you have complete access to the ShipHawk API. Well...almost. First you need to authorize the Ruby client.
+That's it. Now you have complete access to the ShipHawk API from your console. Well...almost. First you need to authorize your Ruby client.
 
-#### Step 1:  Authorize your Client.
+#### Step 2:  Authorize your Client.
 copy and paste the line below into your console. Be sure to use the `api_key` you were provided with.
 ```
 ShipHawk::Client::api_key = 'YOUR_API_KEY'
@@ -50,7 +61,7 @@ ShipHawk::Client::api_key = 'YOUR_API_KEY'
 Don't have an Api Key? *( contact alex.hawkins@shiphawk.com for more information about obtaining one )*
 
 
-#### Step 2:  Set the Origin and Destination Address
+#### Step 3:  Set the Origin and Destination Address
 
 **Note**: Address and Parcel creation via our Ruby Client will be available with the release of **V4**. For now, let's just create an Address using our search endpoint.
 
@@ -58,7 +69,7 @@ Don't have an Api Key? *( contact alex.hawkins@shiphawk.com for more information
 origin_address      = ShipHawk::Api::Addresses.search(q: '90120').first
 destination_address = ShipHawk::Api::Addresses.search(q: '94539').first
 ```
-#### Step 3:  Create the Items we're Shipping
+#### Step 4:  Create the Items we're Shipping
 
 First create a container for storing all your items. We'll call this our `items_cart` and set it equal to an empty array like so:
 
@@ -113,7 +124,7 @@ items_cart.push(sofa)
 items_cart.push(ring)
 ```
 
-#### Step 4: Let's get Rates for the Items we want to ship.
+#### Step 5: Let's get Rates for the Items we want to ship.
 
 In order to get Rates, we need a `to_zip`, `from_zip`, and our `items_cart`. We already have our origin and destination address objects and we **must** use the `zip` from each.
 
@@ -138,7 +149,7 @@ Lets select the first rate that is returned.
 selected_rate = rates.first
 ```
 
-#### Step 5: Time to create a Shipment.
+#### Step 6: Time to create a Shipment.
 
 In order to create a shipment, we need an `order_email`, `destination_address`, `origin_address`, and a `rate_id`. We already have our origin and destination address objects. Let's first get the `id` of the `rate` we selected.
 
