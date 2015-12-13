@@ -114,7 +114,7 @@ ring = {
     }
 ```
 
-**NOTE**: Skip to Step 5 if you've already copied and pasted one of the above items into `shiphawk-irb`.
+**NOTE**: Skip ahead to **Step 5** if you've already copied and pasted one of the above items into `shiphawk-irb`.
 The longer way to create an item is via the `item_object` method. We can use the average dimensions returned with the database item. However, if you already know the dimensions of the package you're shipping, we recommend you use them instead for each of the variables below.
 
 ```ruby
@@ -145,7 +145,7 @@ sofa = ShipHawk::Api::Items.item_object(
 
 #### Step 5: Add Items to your cart
 
-Finally, add your items to the `items_cart`. We're only going to use `big_sofa` from the previous step. If you've created more than one item, you'll to add each item to the `items_cart` array like so:
+Finally, add your items to the `items_cart`. We're only going to use `big_sofa` from the previous step. If you've created more than one item, you'll need to add each item to the `items_cart` array like so:
 ```ruby
 items_cart.push(big_sofa)
 ```
