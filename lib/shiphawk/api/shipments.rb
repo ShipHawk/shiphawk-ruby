@@ -10,12 +10,11 @@ module ShipHawk
 
     class Shipments < Resource
 
-      def self.create_shipment(params={})
-        puts params
-        response, api_key = ShipHawk::Client.request(:post, "/shipments", @api_key, params.to_json)
-        ShipHawk::Helpers::Util::convert_to_ShipHawk_object(response, api_key) if response
+      def self.book(params={})
+        api_key = ShipHawk::Client.api_key
+        response = RestClient.post("https://shiphawk.com/api/v3/shipments?api_key=#{api_key}", params.to_json, :content_type => :json)
+        JSON.parse(response) if response
       end
-
 
       # update/edit a particular Shipment
       def self.update(shipment_id, params={})

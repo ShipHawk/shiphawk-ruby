@@ -66,8 +66,8 @@ Don't have an Api Key? *( contact alex.hawkins@shiphawk.com for more information
 **Note**: Address and Parcel creation via our Ruby Client will be available with the release of **V4**. For now, let's just create an Address using our search endpoint.
 
 ```ruby
-origin_address      = ShipHawk::Api::Addresses::search(q: '90120').first
-destination_address = ShipHawk::Api::Addresses::search(q: '94539').first
+origin_address      = ShipHawk::Api::Addresses::search(q: '90210').first['address']
+destination_address = ShipHawk::Api::Addresses::search(q: '94539').first['address']
 ```
 #### Step 4:  Create the Items we're Shipping
 
@@ -155,8 +155,8 @@ items_cart.push(big_sofa)
 In order to get Rates, we need a `to_zip`, `from_zip`, and our `items_cart`. We already have our origin and destination address objects and we **must** use the `zip` from each.
 
 ```ruby
-from_zip =  origin_address.address.zip
-to_zip   =  destination_address.address.zip
+from_zip =  origin_address['zip']
+to_zip   =  destination_address['zip']
 ```
 
 Now we have the minimum requirements to get Rates
@@ -175,27 +175,21 @@ Lets select the first rate that is returned.
 selected_rate = rates.first
 ```
 
-#### Step 7: Time to create a Shipment.
+#### Step 7: Time to book a Shipment.
 
-In order to create a shipment, we need an `order_email`, `destination_address`, `origin_address`, and a `rate_id`. We already have our origin and destination address objects. Let's first get the `id` of the `rate` we selected.
+In order to create a shipment, we need a `destination_address`, `origin_address`, and a `rate_id`. We already have our origin and destination address objects. Let's first get the `id` of the `rate` we selected.
 
 ```ruby
 rate_id = selected_rate['id']
 ```
-Next, let's set the order email
+
+We now have everything we need to book our shipment. Cool.
 
 ```ruby
-order_email = "biff.tannin@shiphawk.com"
-```
-
-Finally, we have everything we need to create a shipment. Cool.
-
-```ruby
-shipment = ShipHawk::Api::Shipments::create(
+shipment = ShipHawk::Api::Shipments::book(
 	:rate_id => rate_id,
 	:origin_address => origin_address,
-	:destination_address => destination_address,
-	:order_email => order_email
+	:destination_address => destination_address
 )
 ```
 ----
