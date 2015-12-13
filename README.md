@@ -6,7 +6,7 @@ Our ruby gem provides an easy-to-use wrapper for ShipHawk's V3 REST APIs (note t
 
 You can easily integrate many different shipping services into your business with this client (see example below). Please sign up for an account here at **https://shiphawk.com** to get your `api_key`.
 
-**Note**: If you're not a developer, be sure to ask us about our **Dashboard**, a slick UI for organizing all your shipping data. We also offer a variety shipping tools and widgets which can greatly simplify your company's shipping needs.
+**Note**: If you're not a developer, be sure to ask us about our **Dashboard**, a slick UI for organizing all your shipping data. We also offer a variety of shipping tools and widgets which can greatly simplify your company's shipping needs.
 
 ---
 
