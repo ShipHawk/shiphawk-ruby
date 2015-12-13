@@ -38,37 +38,37 @@ shiphawk-irb
 That's it. Now you have complete access to the ShipHawk API. Well...almost. First you need to authorize the Ruby client.
 
 #### Step 1:  Authorize your Client.
-type
+copy and paste the the lines into your console. Be sure to use the api_key you were provided with.
 ```
 ShipHawk::Client::api_key = 'YOUR_API_KEY'
 ```
-Don't have Api Key? *( contact alex.hawkins@shiphawk.com for more information about obtaining one )*
+Don't have an Api Key? *( contact alex.hawkins@shiphawk.com for more information about obtaining one )*
 
 
 #### Step 2:  Set the Origin and Destination Address
 
-Note: Address and Parcel creation via our Ruby Client with the release of V4. For now, let's just create an Address using our search endpoint.
+**Note**: Address and Parcel creation via our Ruby Client will be available with the release of V4. For now, let's just create an Address using our search endpoint.
 
 ```ruby
 origin_address      = ShipHawk::Api::Addresses.search(q: '90120').first
 destination_address = ShipHawk::Api::Addresses.search(q: '94539').first
 ```
-#### Step 3:  Create the Item we're Shipping
+#### Step 3:  Create the Items we're Shipping
 
-First create a container for storing all the items you create. We'll call it our items_cart and set it equal to an empty array.
+First create a container for storing all your items. We'll call this our items_cart and set it equal to an empty array like so:
 
 ```ruby
 items_cart = [];
 ```
 
-Let's assume the item we're shipping is unpacked. Now we'll query the ShipHawk database to find our unpacked item.
+Let's assume the item we're shipping is unpacked. Now we'll query ShipHawk's product database find our unpacked item.
 
 ```ruby
 all_sofas = ShipHawk::Api::Items.search(:q => 'sofa')
 all_rings = ShipHawk::Api::Items.search(:q => 'ring')
 ```
 
-For the sake of simplicity, we're only going to deal with 1 item here. And we're going to select the first item that is returned.
+For the sake of simplicity, we're only going to deal with 1 item here. And we're going to select the first item that is returned and save it to variable called sofa.
 
 ```ruby
 sofa = all_sofas.first
@@ -86,7 +86,7 @@ packed  = false
 value   = 10
 ```
 
-This gives us enough information to create our item object.
+This gives us enough information to create our first item object.
 
 ```ruby
 sofa = Ship::Parcel.ShipHawk::Api::Items.item_object(
@@ -105,6 +105,7 @@ sofa = Ship::Parcel.ShipHawk::Api::Items.item_object(
 Finally, add your items to the items_cart.
 ```ruby
 items_cart.push(sofa)
+items_cart.push(ring)
 ```
 
 #### Step 4: Let's get a Rate for the Items we want to ship.
@@ -115,11 +116,6 @@ In order to get rates, we need a `to_zip`, `from_zip`, and our `items_cart`. We 
 from_zip =  origin_address.address.zip
 to_zip   =  destination_address.address.zip
 ```
-Let's set the order email
-
-```ruby
-order_email  = biff.tannin@shiphawk.com
- ```
 
 Now we have the minimum requirements to get Rates
 
@@ -150,7 +146,7 @@ Next, let's set the order email
 order_email = biff.tannin@shiphawk.com
 ```
 
-Finally, we have everything we need create a shipment. Cool.
+Finally, we have everything we need to create a shipment. Cool.
 
 ```ruby
 shipment = ShipHawk::Api::Shipments.create(
@@ -213,7 +209,7 @@ ShipHawk::Api::Dispatches.create_dispatch(
 
 Track a Shipment
 
-*( contact @alex.hawkins@shiphawk.com about integrating this end point with our Tracking Widget )*
+*( contact @alex.hawkins@shiphawk.com about integrating this end point with our awesome Tracking Widget built with React )*
 
 
 ```ruby
@@ -231,7 +227,6 @@ If you've forgotten the tracking number, you can access it via the Shipments end
 ```ruby
 ShipHawk::Api::Shipments.retrieve('1069967').details.tracking_number
 ```
-
 
 
 Documentation
