@@ -38,7 +38,7 @@ shiphawk-irb
 That's it. Now you have complete access to the ShipHawk API. Well...almost. First you need to authorize the Ruby client.
 
 #### Step 1:  Authorize your Client.
-copy and paste the line below into your console. Be sure to use the api_key you were provided with.
+copy and paste the line below into your console. Be sure to use the `api_key` you were provided with.
 ```
 ShipHawk::Client::api_key = 'YOUR_API_KEY'
 ```
@@ -55,20 +55,20 @@ destination_address = ShipHawk::Api::Addresses.search(q: '94539').first
 ```
 #### Step 3:  Create the Items we're Shipping
 
-First create a container for storing all your items. We'll call this our items_cart and set it equal to an empty array like so:
+First create a container for storing all your items. We'll call this our `items_cart` and set it equal to an empty array like so:
 
 ```ruby
 items_cart = [];
 ```
 
-Let's assume the item we're shipping is unpacked. Now we'll query ShipHawk's product database to find our unpacked item.
+Let's assume the item we're shipping is **unpacked**. Now we'll query ShipHawk's product database to find our unpacked item.
 
 ```ruby
 all_sofas = ShipHawk::Api::Items.search(:q => 'sofa')
 all_rings = ShipHawk::Api::Items.search(:q => 'ring')
 ```
 
-For the sake of simplicity, we're only going to deal with 1 item here. And we're going to select the first item that is returned and save it to a variable called sofa.
+For the sake of simplicity, we're only going to deal with 1 item here. And we're going to select the first item that is returned and save it to a variable called `sofa`.
 
 ```ruby
 sofa = all_sofas.first
@@ -102,15 +102,15 @@ sofa = ShipHawk::Api::Items.item_object(
 
 **Note:** Repeat this process for multiple items if you'd like.
 
-Finally, add your items to the items_cart.
+Finally, add your items to the `items_cart`.
 ```ruby
 items_cart.push(sofa)
 items_cart.push(ring)
 ```
 
-#### Step 4: Let's get a Rate for the Items we want to ship.
+#### Step 4: Let's get Rates for the Items we want to ship.
 
-In order to get rates, we need a `to_zip`, `from_zip`, and our `items_cart`. We already have our origin and destination address objects and we **must** use the zip from each.
+In order to get Rates, we need a `to_zip`, `from_zip`, and our `items_cart`. We already have our origin and destination address objects and we **must** use the `zip` from each.
 
 ```ruby
 from_zip =  origin_address.address.zip
