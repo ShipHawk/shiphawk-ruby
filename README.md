@@ -105,7 +105,7 @@ big_sofa = {
 
 ring = {
     "id"=>"126",
-    "length"=>"1.0",
+    "length"=>1.0,
     "width"=>1.0,
     "height"=>1.0,
     "weight"=>1.0,
