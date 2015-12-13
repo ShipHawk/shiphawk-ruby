@@ -8,7 +8,6 @@ module ShipHawk
     OPEN_TIMEOUT = 30
     TIMEOUT = 60
     SSL_VERSION = 'TLSv1'
-    @api_key = nil
 
     def api_url=(url)
       @api_url = API_BASE + url
