@@ -38,7 +38,7 @@ shiphawk-irb
 That's it. Now you have complete access to the ShipHawk API. Well...almost. First you need to authorize the Ruby client.
 
 #### Step 1:  Authorize your Client.
-copy and paste the the lines into your console. Be sure to use the api_key you were provided with.
+copy and paste the line below into your console. Be sure to use the api_key you were provided with.
 ```
 ShipHawk::Client::api_key = 'YOUR_API_KEY'
 ```
@@ -47,7 +47,7 @@ Don't have an Api Key? *( contact alex.hawkins@shiphawk.com for more information
 
 #### Step 2:  Set the Origin and Destination Address
 
-**Note**: Address and Parcel creation via our Ruby Client will be available with the release of V4. For now, let's just create an Address using our search endpoint.
+**Note**: Address and Parcel creation via our Ruby Client will be available with the release of **V4**. For now, let's just create an Address using our search endpoint.
 
 ```ruby
 origin_address      = ShipHawk::Api::Addresses.search(q: '90120').first
