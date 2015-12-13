@@ -257,7 +257,7 @@ Track a Shipment
 
 
 ```ruby
-tracking_info = ShipHawk::API::Public.shipment_tracking_info(
+tracking_info = ShipHawk::Api::Public.shipment_tracking_info(
 	:code => 'mxd',
 	:tracking_number => '3434343434'
 )
