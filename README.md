@@ -114,7 +114,8 @@ ring = {
     }
 ```
 
-The longer way to create these items is via the `item_object` method. We can use the average dimensions returned with the database item. However, if you already know the dimensions of the package you're shipping, we recommend you use them instead for each of the variables below.
+**NOTE**: Skip to Step 5 if you've already copied and pasted one of the above items into `shiphawk-irb`.
+The longer way to create an item is via the `item_object` method. We can use the average dimensions returned with the database item. However, if you already know the dimensions of the package you're shipping, we recommend you use them instead for each of the variables below.
 
 ```ruby
 item_id = sofa['id']
@@ -142,12 +143,14 @@ sofa = ShipHawk::Api::Items.item_object(
 
 **Note:** Repeat this process for multiple items if you'd like.
 
-Finally, add your items to the `items_cart`. We're only going to use `big_sofa` from the previous step.
+#### Step 5: Add Items to your cart
+
+Finally, add your items to the `items_cart`. We're only going to use `big_sofa` from the previous step. If you've created more than one item, you'll to add each item to the `items_cart` array like so:
 ```ruby
 items_cart.push(big_sofa)
 ```
 
-#### Step 5: Let's get Rates for the Items we want to ship.
+#### Step 6: Let's get Rates for the Items we want to ship.
 
 In order to get Rates, we need a `to_zip`, `from_zip`, and our `items_cart`. We already have our origin and destination address objects and we **must** use the `zip` from each.
 
@@ -172,7 +175,7 @@ Lets select the first rate that is returned.
 selected_rate = rates.first
 ```
 
-#### Step 6: Time to create a Shipment.
+#### Step 7: Time to create a Shipment.
 
 In order to create a shipment, we need an `order_email`, `destination_address`, `origin_address`, and a `rate_id`. We already have our origin and destination address objects. Let's first get the `id` of the `rate` we selected.
 
