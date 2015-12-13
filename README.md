@@ -67,7 +67,7 @@ Don't have an Api Key? *( contact alex.hawkins@shiphawk.com for more information
 
 ```ruby
 origin_address      = ShipHawk::Api::Addresses::search(q: '90210').first['address']
-destination_address = ShipHawk::Api::Addresses::search(q: '94539').first['address']
+destination_address = ShipHawk::Api::Addresses::search(q: '92115').first['address']
 ```
 #### Step 4:  Create the Items we're Shipping
 
@@ -105,10 +105,10 @@ big_sofa = {
 
 ring = {
     "id"=>"126",
-    "length"=>"0.0",
+    "length"=>"1.0",
     "width"=>1.0,
     "height"=>1.0,
-    "weight"=>0.0,
+    "weight"=>1.0,
     "packed"=>false,
     "value"=>1000.0
     }
@@ -169,21 +169,29 @@ rates = ShipHawk::Api::Rates::create_rates(
 )
 ```
 
-Lets select the first rate that is returned.
-
+Too see how many rates were created, type:
 ```ruby
-selected_rate = rates.first
+rate_count = rates.count
+```
+
+Lets select the lowest and the highest rate for the sake of comparison.
+```ruby
+lowest_rate  = rates.first
+highest_rate = rates.last
+
+lowest_total_price  = lowest_rate['total_price']
+highest_total_price = highest_rate['total_price']
 ```
 
 #### Step 7: Time to book a Shipment.
 
-In order to create a shipment, we need a `destination_address`, `origin_address`, and a `rate_id`. We already have our origin and destination address objects. Let's first get the `id` of the `rate` we selected.
+In order to book a shipment, we need, at minimum, a `destination_address`, `origin_address`, and a `rate_id`. We already have our origin and destination address objects. Let's first get the `id` of the `rate` we selected.
 
 ```ruby
-rate_id = selected_rate['id']
+rate_id = lowest_rate['id']
 ```
 
-We now have everything we need to book our shipment. Cool.
+We now have everything we need to book our first shipment. Cool.
 
 ```ruby
 shipment = ShipHawk::Api::Shipments::book(
