@@ -269,7 +269,7 @@ status_updates = tracking_info.status_updates
 If you've forgotten the tracking number, you can access it via the Shipments end point.
 
 ```ruby
-ShipHawk::Api::Shipments.retrieve('1069967').details.tracking_number
+tracking_number = ShipHawk::Api::Shipments.retrieve('1069967').details.tracking_number
 ```
 ---
 
