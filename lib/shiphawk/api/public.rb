@@ -10,9 +10,6 @@ module ShipHawk
 
     class Public < Resource
 
-      def initialize
-        super()
-      end
       # retrieve tracking information for a specific shipment
       # @params [ code ], string, required (refers to carrier short code, contact alex.hawkins@shiphawk.com for a complete list of codes)
       #         [ tracking_number ], string, required
