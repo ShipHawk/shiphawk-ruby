@@ -74,7 +74,7 @@ destination_address = ShipHawk::Api::Addresses.search(q: '94539').first
 First create a container for storing all your items. We'll call this our `items_cart` and set it equal to an empty array like so:
 
 ```ruby
-items_cart = [];
+items_cart = []
 ```
 
 Let's assume the item we're shipping is **unpacked**. Now we'll query ShipHawk's product database to find our unpacked item.
