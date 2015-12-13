@@ -1,6 +1,5 @@
 # ShipHawk Ruby Client Library
 
-
 **ShipHawk** is a powerful shipping API for managing all of your shipping data. We streamline the shipping process for you, making it easy to ship and manage everything from small parcel to freight to multi-palletized shipments. Through use of our client, you will gain insights into the business of shipping that will save your company and clients both time and money.
 
 Our ruby gem provides an easy-to-use wrapper for ShipHawk's V3 REST APIs (note the new and improved V4 endpoints will be released shortly).
@@ -8,6 +7,8 @@ Our ruby gem provides an easy-to-use wrapper for ShipHawk's V3 REST APIs (note t
 Your can easily integrate many different shipping services into your business with this client (see example below). Please sign up for an account here at **https://shiphawk.com** to get your `api_key`.
 
 **Note**: If you're not a developer, be sure to ask us about our **Dashboard**, a slick UI for organizing all your shipping data. We also offer a variety shipping tools and widgets which can greatly simplify your company's shipping needs.
+
+---
 
 Installation
 ---------------
@@ -24,6 +25,10 @@ Import the ShipHawk client into your application by adding these lines:
 require 'shipawk'
 ShipHawk::Client::api_key =  'YOUR_API_KEY'
 ```
+
+---
+
+
 
 Example Usage
 ------------------
@@ -158,6 +163,8 @@ shipment = ShipHawk::Api::Shipments.create(
 ```
 ----
 
+
+
 Other Cool Things you can do with our Client
 --------------------
 
@@ -227,6 +234,7 @@ If you've forgotten the tracking number, you can access it via the Shipments end
 ```ruby
 ShipHawk::Api::Shipments.retrieve('1069967').details.tracking_number
 ```
+---
 
 
 Documentation
