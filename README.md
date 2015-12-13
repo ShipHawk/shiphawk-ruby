@@ -61,14 +61,14 @@ First create a container for storing all your items. We'll call this our items_c
 items_cart = [];
 ```
 
-Let's assume the item we're shipping is unpacked. Now we'll query ShipHawk's product database find our unpacked item.
+Let's assume the item we're shipping is unpacked. Now we'll query ShipHawk's product database to find our unpacked item.
 
 ```ruby
 all_sofas = ShipHawk::Api::Items.search(:q => 'sofa')
 all_rings = ShipHawk::Api::Items.search(:q => 'ring')
 ```
 
-For the sake of simplicity, we're only going to deal with 1 item here. And we're going to select the first item that is returned and save it to variable called sofa.
+For the sake of simplicity, we're only going to deal with 1 item here. And we're going to select the first item that is returned and save it to a variable called sofa.
 
 ```ruby
 sofa = all_sofas.first
@@ -89,7 +89,7 @@ value   = 10
 This gives us enough information to create our first item object.
 
 ```ruby
-sofa = Ship::Parcel.ShipHawk::Api::Items.item_object(
+sofa = ShipHawk::Api::Items.item_object(
   	item_id,
   	length,
   	width,
@@ -158,7 +158,7 @@ shipment = ShipHawk::Api::Shipments.create(
 ```
 ----
 
-Other Things you can do with our Client
+Other Cool Things you can do with our Client
 --------------------
 
 #### Zip Codes
@@ -209,7 +209,7 @@ ShipHawk::Api::Dispatches.create_dispatch(
 
 Track a Shipment
 
-*( contact @alex.hawkins@shiphawk.com about integrating this end point with our awesome Tracking Widget built with React )*
+*(contact ahawk@shiphawk.com about integrating this end point with our awesome Tracking Widget built w/ cutting edge technology)*
 
 
 ```ruby
