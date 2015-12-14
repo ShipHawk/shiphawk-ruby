@@ -95,6 +95,42 @@ Don't have an Api Key? *( contact alex.hawkins@shiphawk.com for more information
 origin_address      = ShipHawk::Api::Addresses::search(q: '90210').first['address']
 destination_address = ShipHawk::Api::Addresses::search(q: '92115').first['address']
 ```
+**Note**: If you haven't added any addresses to your address book yet, you won't be able use our address search end point. You can create one manually like so. Once you've booked your shipment, this address will be added to your address book and become searchable.
+```ruby
+destination_address = {
+  "first_name"=>"Biff",
+  "last_name"=>"Tannin", 
+  "street1"=>"6015 Arosa St",
+  "street2"=>nil,
+  "city"=>"Santa Barbara",
+  "state"=>"CA",
+  "zip"=>"93101",
+  "phone_number"=>"805-265-2495",
+  "email"=>"biff.tanning@shiphawk.com",
+  "company"=>nil,
+  "location_type"=>"residential",
+  "country"=>"US",
+  "code"=>nil
+}
+
+origin_address = {
+  "first_name"=>"Hans",
+  "last_name"=>"Gruber", 
+  "street1"=>"2017 Die Hard St",
+  "street2"=>nil,
+  "city"=>"Santa Barbara",
+  "state"=>"CA",
+  "zip"=>"93101",
+  "phone_number"=>"805-187-2495",
+  "email"=>"hans.gruber@shiphawk.com",
+  "company"=>nil,
+  "location_type"=>"commercial",
+  "country"=>"US",
+  "code"=>nil
+}
+
+```
+
 #### Step 4:  Create the Items we're Shipping
 
 First create a container for storing all your items. We'll call this our `items_cart` and set it equal to an empty array like so:
