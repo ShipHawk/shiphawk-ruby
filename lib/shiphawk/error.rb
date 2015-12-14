@@ -14,6 +14,8 @@ module ShipHawk
       @http_body = http_body
       @json_body = json_body
       puts @message
+      puts @http_body
+      puts @json_body
       @param = @json_body.fetch(:error, {}).fetch(:param, nil)
       @code = @json_body.fetch(:error, {}).fetch(:code, nil)
       @errors = @json_body.fetch(:error, {}).fetch(:errors, nil)

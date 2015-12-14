@@ -59,8 +59,6 @@ module ShipHawk
       api_key ||= @api_key
       raise Error.new('No API key provided.') unless api_key
       params = ShipHawk::Helpers::Util.objects_to_ids(params)
-      puts @@api_base
-      puts url
       url = @@api_base + url
       case method.to_s.downcase.to_sym
         when :get, :head, :delete
