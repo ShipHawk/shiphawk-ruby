@@ -4,6 +4,6 @@ irb = RUBY_PLATFORM =~ /(:?mswin|mingw)/ ? 'irb.bat' : 'irb'
 libs =  " -r irb/completion"
 libs <<  " -r #{File.dirname(__FILE__) + '/../lib/shiphawk'}"
 puts "..."
-puts "Initializing ShipHawk Interactive Ruby Client..."
+puts "Initializing ShipHawk Interactive Ruby Shell..."
 puts "..."
 exec "#{irb} #{libs} --simple-prompt"
