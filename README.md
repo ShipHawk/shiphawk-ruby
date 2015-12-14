@@ -63,16 +63,17 @@ ShipHawk::Client::api_key = 'YOUR_API_KEY'
 Once you've authorized your Client, you can view all of your account api keys like so:
 ```ruby
 api_keys = ShipHawk::Api::ApiKeys::all
-text
 ```
-To change your api_key for use with an alternate environment such as SandBox
+And to change your `api_key` for use with an alternate environment such as SandBox:
 ```ruby
 ShipHawk::Client::api_key = 'YOUR_SANDBOX_API_KEY'
 ```
-If you've changed your api key for use with the SandBox environment you'll need to update your base url. You can do that like so:
+Once you've updated your api_key, you'll need to update your base url to match the corresponding environment:
 ```ruby
+# to use the Sand Box environment
 ShipHawk::Client::api_base = ShipHawk::Client::SANDBOX_API_HOST
-# and to switch back to production:
+
+# and to switch back to Production:
 ShipHawk::Client::api_base = ShipHawk::Client::PRODUCTION_API_HOST
 ShipHawk::Client::api_key = 'YOUR_PRODUCTION_API_KEY'
 ```
