@@ -55,20 +55,20 @@ shiphawk-irb
 That's it. Now you have complete access to the ShipHawk API from your console. Well...almost. First you need to authorize your Ruby client.
 
 #### Step 2:  Authorize your Client.
-Copy and paste the line below into your console. Be sure to use the `api_key` you were provided with.
+Copy and paste the line below into your console. Be sure to use the Api Key you were provided with.
 ```
 ShipHawk::Client::api_key = 'YOUR_API_KEY'
 ```
 
-Once you've authorized your Client, you can view all of your account api keys like so:
+Once you've authorized your Client, you can view all of your account Api Keys like so:
 ```ruby
 api_keys = ShipHawk::Api::ApiKeys::all
 ```
-To change your `api_key` for use with the SandBox testing environment:
+To change your Api Key for use with the SandBox testing environment:
 ```ruby
 ShipHawk::Client::api_key = api_keys.test_token
 ```
-**Note**: Once you've updated your api_key, you'll need to update your api base url to match the corresponding environment:
+**Note**: Once you've updated your Api Key, you'll need to update your api base url to match the corresponding environment:
 ```ruby
 # to use the SandBox environment
 ShipHawk::Client::api_base = ShipHawk::Client::SANDBOX_API_HOST
@@ -79,11 +79,11 @@ ShipHawk::Client::api_key = 'YOUR_PRODUCTION_API_KEY'
 ```
 If you think your Api Key has been compromised, you can quickly regenerate a new one on the fly:
 ```ruby
-# regenerate an api key for your SandBox environment
+# regenerate an Api Key for your SandBox environment
 sandbox_api_key = ShipHawk::Api::ApiKeys::regenerate_sandbox
 ShipHawk::Client::api_key = sandbox_api_key['test_token']
 
-# regenerate an api key for your Production environment
+# regenerate an Api Key for your Production environment
 production_api_key = ShipHawk::Api::ApiKeys::regenerate_production
 ShipHawk::Client::api_key = production_api_key['token']
 ```
