@@ -32,7 +32,7 @@ ShipHawk::Client::api_key =  'YOUR_API_KEY'
 Example Usage
 ------------------
 
-In the following example, we're going to make it easy for you to test out our Ruby client and API endpoints. We'll be booking a shipment via the command line. Yes, it is entirely possible to get Rates, book and track your Shipments etc... from your console.
+In the following example, we're going to make it easy for you to test and learn about our Ruby client and API endpoints. We'll be booking a shipment via the command line. Yes, it is entirely possible to get Rates, book and track your Shipments etc... from your console.
 
 #### Step 1:  Clone the ShipHawk Ruby Client locally.
 
