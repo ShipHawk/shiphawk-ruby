@@ -9,9 +9,16 @@ module ShipHawk
     #
     class ApiKeys < Resource
 
-          # Get all API keys for an account using an API key
-      def api_keys_index
-        get_request api_keys_path, {}
+      # Regenerate SandBox API key for your account
+      def self.regenerate_sandbox
+        response, api_key = ShipHawk::Client.request(:put, '/api_keys/sandbox', @api_key)
+        ShipHawk::Helpers::Util::convert_to_ShipHawk_object(response, api_key) if response
+      end
+
+      # Regenerate Production API key for your account
+      def self.regenerate_production
+        response, api_key = ShipHawk::Client.request(:put, '/api_keys/production', @api_key)
+        ShipHawk::Helpers::Util::convert_to_ShipHawk_object(response, api_key) if response
       end
 
     end
