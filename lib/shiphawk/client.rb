@@ -1,16 +1,16 @@
 module ShipHawk
   module Client
     extend self
-    PRODUCTION_API_HOST = 'https://shiphawk.com/api/'
-    SANDBOX_API_HOST = 'https://sandbox.shiphawk.com'
     DEFAULT_API_VERSION = 'v3'
-    API_BASE = PRODUCTION_API_HOST + DEFAULT_API_VERSION
+    PRODUCTION_API_HOST = 'https://shiphawk.com/api/v3'
+    SANDBOX_API_HOST = 'https://sandbox.shiphawk.com/api/v3'
     OPEN_TIMEOUT = 30
     TIMEOUT = 60
     SSL_VERSION = 'TLSv1'
+    @@api_base = PRODUCTION_API_HOST
 
     def api_url=(url)
-      @api_url = API_BASE + url
+      @api_url = @api_base + url
     end
 
     def api_url
@@ -26,8 +26,13 @@ module ShipHawk
     end
 
     def api_base
-      @api_base ||= API_BASE
+      @@api_base ||= API_BASE
     end
+
+    def api_base=(api_base_url)
+      @@api_base = api_base_url
+    end
+
 
     def api_version=(version)
       @api_version = version
@@ -51,12 +56,12 @@ module ShipHawk
     end
 
     def request(method, url, api_key, params={}, headers={})
-      puts url
       api_key ||= @api_key
       raise Error.new('No API key provided.') unless api_key
-
       params = ShipHawk::Helpers::Util.objects_to_ids(params)
-      url = API_BASE + url
+      puts @@api_base
+      puts url
+      url = @@api_base + url
       case method.to_s.downcase.to_sym
         when :get, :head, :delete
           # Make params into GET parameters

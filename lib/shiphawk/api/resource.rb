@@ -23,7 +23,7 @@ module ShipHawk
         "#{self.class.url}/#{CGI.escape(id)}"
       end
 
-      def refresh
+      def self.refresh
         response, api_key = ShipHawk::Client::request(:get, url, @api_key, @retrieve_options)
         refresh_from(response, api_key)
         self
@@ -47,13 +47,13 @@ module ShipHawk
         ShipHawk::Helpers::Util.convert_to_ShipHawk_object(response, api_key)
       end
 
-      def delete
+      def self.delete
         response, api_key = ShipHawk::Client::request(:delete, url, @api_key)
         refresh_from(response, api_key)
         self
       end
 
-      def save
+      def self.save
         if @unsaved_values.length > 0
           values = {}
           @unsaved_values.each { |k| values[k] = @values[k] }

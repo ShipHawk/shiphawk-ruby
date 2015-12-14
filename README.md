@@ -26,6 +26,7 @@ require 'shipawk'
 ShipHawk::Client::api_key =  'YOUR_API_KEY'
 ```
 
+If you have multiple api_keys for different environments, you can view them all,
 ---
 
 
@@ -57,6 +58,23 @@ That's it. Now you have complete access to the ShipHawk API from your console. W
 copy and paste the line below into your console. Be sure to use the `api_key` you were provided with.
 ```
 ShipHawk::Client::api_key = 'YOUR_API_KEY'
+```
+
+Once you've authorized your Client, you can view all of your account api keys like so:
+```ruby
+api_keys = ShipHawk::Api::ApiKeys::all
+text
+```
+To change your api_key for use with an alternate environment such as SandBox
+```ruby
+ShipHawk::Client::api_key = 'YOUR_SANDBOX_API_KEY'
+```
+If you've changed your api key for use with the SandBox environment you'll need to update your base url. You can do that like so:
+```ruby
+ShipHawk::Client::api_base = ShipHawk::Client::SANDBOX_API_HOST
+# and to switch back to production:
+ShipHawk::Client::api_base = ShipHawk::Client::PRODUCTION_API_HOST
+ShipHawk::Client::api_key = 'YOUR_PRODUCTION_API_KEY'
 ```
 Don't have an Api Key? *( contact alex.hawkins@shiphawk.com for more information about obtaining one )*
 
