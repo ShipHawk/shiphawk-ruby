@@ -68,7 +68,7 @@ To change your `api_key` for use with the SandBox testing environment:
 ```ruby
 ShipHawk::Client::api_key = api_keys.test_token
 ```
-*Note*: Once you've updated your api_key, you'll need to update your api base url to match the corresponding environment:
+**Note**: Once you've updated your api_key, you'll need to update your api base url to match the corresponding environment:
 ```ruby
 # to use the SandBox environment
 ShipHawk::Client::api_base = ShipHawk::Client::SANDBOX_API_HOST
