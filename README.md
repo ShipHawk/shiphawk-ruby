@@ -195,7 +195,7 @@ rates = ShipHawk::Api::Rates::create_rates(
 )
 ```
 
-Too see how many rates were created, type:
+To see how many rates were created, type:
 ```ruby
 rate_count = rates.count
 ```
