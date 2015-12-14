@@ -25,8 +25,6 @@ Import the ShipHawk client into your application by adding these lines:
 require 'shipawk'
 ShipHawk::Client::api_key =  'YOUR_API_KEY'
 ```
-
-If you have multiple api_keys for different environments, you can view them all,
 ---
 
 
