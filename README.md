@@ -329,6 +329,12 @@ carrier_logos = ShipHawk::Api::Carriers.logos
 my_carrier_credentials = ShipHawk::Api::Carriers.credentials
 ```
 
+#### Products
+
+```ruby
+product_sku = '123123123'
+product = ShipHawk::Api::Products.find_by('1123123')
+```
 #### Public (Auth not required)
 
 Track a Shipment

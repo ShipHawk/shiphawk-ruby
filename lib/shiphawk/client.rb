@@ -55,7 +55,8 @@ module ShipHawk
       http_config.merge!(http_config_params)
     end
 
-    def request(method, url, api_key, params={}, headers={})
+    def request(method, url, api_key, params={}, headers={}, x_api_key=false)
+      headers = {:x_api_key => @api_key.to_s} if x_api_key
       api_key ||= @api_key
       raise Error.new('No API key provided.') unless api_key
       params = ShipHawk::Helpers::Util.objects_to_ids(params)
@@ -63,10 +64,13 @@ module ShipHawk
       case method.to_s.downcase.to_sym
         when :get, :head, :delete
           # Make params into GET parameters
-          if params && params.count > 0
+          if params && params.count > 0 && !x_api_key
             query_string = ShipHawk::Helpers::Util.flatten_params(params).collect{|key, value| "#{key}=#{ShipHawk::Helpers::Util.url_encode(value)}"}.join('&')
             url += "#{URI.parse(url).query ? '&' : '?'}#{query_string}" + '&api_key=' + api_key
             puts url
+          elsif params && params.count > 0 && x_api_key
+            query_string = ShipHawk::Helpers::Util.flatten_params(params).collect{|key, value| "#{key}=#{ShipHawk::Helpers::Util.url_encode(value)}"}.join('&')
+            url += "#{URI.parse(url).query ? '&' : '?'}#{query_string}"
           end
           payload = nil
         else
@@ -78,7 +82,7 @@ module ShipHawk
           :authorization => "Bearer #{api_key}",
           :content_type => 'application/x-www-form-urlencoded'
       }.merge(headers)
-
+      puts headers
       opts = http_config.merge(
           {
               :method => method,
