@@ -332,9 +332,9 @@ my_carrier_credentials = ShipHawk::Api::Carriers.credentials
 #### Products
 
 ```ruby
-# retrieve a product
-product_sku = '123123123'
-product = ShipHawk::Api::Products.find_by('1123123')
+# retrieve a product ( this will only work if you have created products. see next step )
+product_sku = 'B002VH3AMK'
+product = ShipHawk::Api::Products.find_by(product_sku)
 
 # create a product
 
@@ -353,7 +353,7 @@ new_category = ShipHawk::Api::Categories.build(
     :url => "http://amzn.com/B002VH3AMK"
 )
 
-# Now you can create a Product using the new_category we created and our account_id:
+# Now you can create a Product using the new_category we created and your account_id:
 
 category_name = new_category.category
 
