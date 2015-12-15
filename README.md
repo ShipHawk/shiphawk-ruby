@@ -354,7 +354,6 @@ new_category = ShipHawk::Api::Categories.build(
 )
 
 # Now you can create a Product using the new_category we created and your account_id:
-
 category_name = new_category.category
 
 product = ShipHawk::Api::Products.build(
@@ -375,10 +374,8 @@ product = ShipHawk::Api::Products.build(
 )
 
 # Now let's make sure our product was created. We can find it by product_sku.
-
 product_sku = product.product_sku
 new_product = ShipHawk::Api::Products.find_by(product_sku)
- 
 
 ```
 
