@@ -99,7 +99,7 @@ Don't have an Api Key? *( contact alex.hawkins@shiphawk.com for more information
 origin_address      = ShipHawk::Api::Addresses.search(q: '90210').first['address']
 destination_address = ShipHawk::Api::Addresses.search(q: '92115').first['address']
 ```
-**Note**: If you haven't added any addresses to your address book yet, you won't be able use our address search end point. You can create one manually like so. Once you've booked your shipment, this address will be added to your address book and become searchable.
+**Special Note**: If you haven't added any addresses to your address book yet, you won't be able use our address search end point. You can create your addresses manually(see below). Once you've booked your shipment, each address(destination & origin) will be added to your address book and become searchable.
 ```ruby
 destination_address = {
   "first_name"=>"Biff",
