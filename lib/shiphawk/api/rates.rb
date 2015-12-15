@@ -12,13 +12,13 @@ module ShipHawk
       # create a new set of rates
       # @params [ items ], Object, required
       #         [ to_zip ], string, required
-      #         [ from_zip ], string, required
+      #         [ from_zip ], string, require
 
       def self.create_rates(params={})
         api_key = ShipHawk::Client.api_key
+        api_base = ShipHawk::Client.api_base
         params = {}.merge(params)
-        puts params
-        response = RestClient.post("https://shiphawk.com/api/v3/rates?api_key=#{api_key}", params.to_json, :content_type => :json)
+        response = RestClient.post("#{api_base}/rates?api_key=#{api_key}", params.to_json, :content_type => :json)
         JSON.parse(response) if response
       end
 

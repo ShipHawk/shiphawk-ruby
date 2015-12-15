@@ -12,7 +12,8 @@ module ShipHawk
 
       def self.book(params={})
         api_key = ShipHawk::Client.api_key
-        response = RestClient.post("https://shiphawk.com/api/v3/shipments?api_key=#{api_key}", params.to_json, :content_type => :json)
+        api_base = ShipHawk::Client.api_base
+        response = RestClient.post("#{api_base}/shipments?api_key=#{api_key}", params.to_json, :content_type => :json)
         JSON.parse(response) if response
       end
 
