@@ -251,10 +251,11 @@ highest_total_price = highest_rate['total_price']
 
 #### Step 7: Time to book a Shipment.
 
-In order to book a shipment, we need, at minimum, a `destination_address`, `origin_address`, and a `rate_id`. We already have our origin and destination address objects. Let's first get the `id` of the `rate` we selected.
+In order to book a shipment, we need, at minimum, a `destination_address`, `origin_address`, `pickup[start_time]` and a `rate_id`. We already have our origin and destination address objects. Let's first get the `id` of the `rate` we selected.
 
 ```ruby
-rate_id = lowest_rate[:id]
+rate_id = lowest_rate['id']
+pickup_start_time = "2015-12-29 19:00:00"
 ```
 
 We now have everything we need to book our first shipment. Cool.
@@ -262,6 +263,7 @@ We now have everything we need to book our first shipment. Cool.
 ```ruby
 shipment = ShipHawk::Api::Shipments.book(
 	:rate_id => rate_id,
+	:pickup=>[{:start_time=>pickup_start_time}], 
 	:origin_address => origin_address,
 	:destination_address => destination_address
 )
