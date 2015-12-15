@@ -254,7 +254,7 @@ highest_total_price = highest_rate['total_price']
 In order to book a shipment, we need, at minimum, a `destination_address`, `origin_address`, and a `rate_id`. We already have our origin and destination address objects. Let's first get the `id` of the `rate` we selected.
 
 ```ruby
-rate_id = lowest_rate['id']
+rate_id = lowest_rate[:id]
 ```
 
 We now have everything we need to book our first shipment. Cool.
@@ -265,6 +265,10 @@ shipment = ShipHawk::Api::Shipments.book(
 	:origin_address => origin_address,
 	:destination_address => destination_address
 )
+
+# Finally, let's check to see if our shipment was booked. We should be able to find it in the ShipHawk DB.
+shipment_id = shipment.details.id.to_s
+booked_shipment = ShipHawk::Api::Shipments.find(shipment_id)
 ```
 ----
 
