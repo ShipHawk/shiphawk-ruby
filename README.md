@@ -54,13 +54,17 @@ That's it. Now you have complete access to the ShipHawk API from your console. W
 
 #### Step 2:  Authorize your Client.
 Copy and paste the line below into your console. Be sure to use the Api Key you were provided with.
-```
+```ruby
 ShipHawk::Client::api_key = 'YOUR_API_KEY'
+
+# You're welcome to use the ShipHawk testing environment Api Key as well
+
+ShipHawk::Client::api_key = 'b7f2ca506fc8f91d3d6a067c1097fb16'
 ```
 
 Once you've authorized your Client, you can view all of your account Api Keys like so:
 ```ruby
-api_keys = ShipHawk::Api::ApiKeys::all
+api_keys = ShipHawk::Api::ApiKeys.all
 ```
 To change your Api Key for use with the SandBox testing environment:
 ```ruby
@@ -78,11 +82,11 @@ ShipHawk::Client::api_key = 'YOUR_PRODUCTION_API_KEY'
 If you think your Api Key has been compromised, you can quickly regenerate a new one on the fly:
 ```ruby
 # regenerate an Api Key for your SandBox environment
-sandbox_api_key = ShipHawk::Api::ApiKeys::regenerate_sandbox
+sandbox_api_key = ShipHawk::Api::ApiKeys.regenerate_sandbox
 ShipHawk::Client::api_key = sandbox_api_key['test_token']
 
 # regenerate an Api Key for your Production environment
-production_api_key = ShipHawk::Api::ApiKeys::regenerate_production
+production_api_key = ShipHawk::Api::ApiKeys.regenerate_production
 ShipHawk::Client::api_key = production_api_key['token']
 ```
 Don't have an Api Key? *( contact alex.hawkins@shiphawk.com for more information about obtaining one )*
@@ -92,8 +96,8 @@ Don't have an Api Key? *( contact alex.hawkins@shiphawk.com for more information
 **Note**: Address and Parcel creation via our Ruby Client will be available with the release of **V4**. For now, let's just create an Address using our search endpoint.
 
 ```ruby
-origin_address      = ShipHawk::Api::Addresses::search(q: '90210').first['address']
-destination_address = ShipHawk::Api::Addresses::search(q: '92115').first['address']
+origin_address      = ShipHawk::Api::Addresses.search(q: '90210').first['address']
+destination_address = ShipHawk::Api::Addresses.search(q: '92115').first['address']
 ```
 **Note**: If you haven't added any addresses to your address book yet, you won't be able use our address search end point. You can create one manually like so. Once you've booked your shipment, this address will be added to your address book and become searchable.
 ```ruby
@@ -142,8 +146,8 @@ items_cart = []
 Let's assume the item we're shipping is **unpacked**. Now we'll query ShipHawk's product database to find our unpacked item.
 
 ```ruby
-all_sofas = ShipHawk::Api::Items::search(:q => 'sofa')
-all_rings = ShipHawk::Api::Items::search(:q => 'ring')
+all_sofas = ShipHawk::Api::Items.search(:q => 'sofa')
+all_rings = ShipHawk::Api::Items.search(:q => 'ring')
 ```
 
 For the sake of simplicity, we're only going to deal with 1 item here. And we're going to select the first item that is returned and save it to a variable called `sofa`.
@@ -192,7 +196,7 @@ value   = 10
 This gives us enough information to create an item object.
 
 ```ruby
-sofa = ShipHawk::Api::Items::item_object(
+sofa = ShipHawk::Api::Items.item_object(
   	item_id,
   	length,
   	width,
@@ -224,7 +228,7 @@ to_zip   =  destination_address['zip']
 Now we have the minimum requirements to get Rates
 
 ```ruby
-rates = ShipHawk::Api::Rates::create_rates(
+rates = ShipHawk::Api::Rates.create_rates(
 	"to_zip" => to_zip,
 	"from_zip" => from_zip,
 	"items" => items_cart
@@ -256,7 +260,7 @@ rate_id = lowest_rate['id']
 We now have everything we need to book our first shipment. Cool.
 
 ```ruby
-shipment = ShipHawk::Api::Shipments::book(
+shipment = ShipHawk::Api::Shipments.book(
 	:rate_id => rate_id,
 	:origin_address => origin_address,
 	:destination_address => destination_address
@@ -272,36 +276,36 @@ Other Cool Things you can do with our Client
 #### Zip Codes
 
 ```ruby
-all_zips = ShipHawk::Api::ZipCodes::all
-paginated_zips = ShipHawk::Api::ZipCodes::all(:page => 1, :per_page => 20)
-zip_query = ShipHawk::Api::ZipCodes::search(:q => '90210')
+all_zips = ShipHawk::Api::ZipCodes.all
+paginated_zips = ShipHawk::Api::ZipCodes.all(:page => 1, :per_page => 20)
+zip_query = ShipHawk::Api::ZipCodes.search(:q => '90210')
 ```
 
 #### Items
 
 ```ruby
-item_by_id = ShipHawk::Api::Items::retrieve('942')
-item_query = ShipHawk::Api::Items::search(:q => 'Aston Martin')
-all_items  = ShipHawk::Api::Items::all
-paginated  = ShipHawk::Api::Items::all(:page => 1, :per_page => 100)
+item_by_id = ShipHawk::Api::Items.retrieve('942')
+item_query = ShipHawk::Api::Items.search(:q => 'Aston Martin')
+all_items  = ShipHawk::Api::Items.all
+paginated  = ShipHawk::Api::Items.all(:page => 1, :per_page => 100)
 ```
 #### Shipments
 
 ```ruby
-all_my_shipments = ShipHawk::Api::Shipments::all
-paginated = ShipHawk::Api::Shipments::all(:page => 1, :per_page => 10)
-shipment_by_id = ShipHawk::Api::Shipments::retrieve('1069967')
-bol_url = ShipHawk::Api::Shipments::get_bol_url('1069967')
-tracking = ShipHawk::Api::Shipments::get_tracking('1069967')
-notes = ShipHawk::Api::Shipments::get_notes('1069967')
-address_labels = ShipHawk::Api::Shipments::get_address_labels('1069967')
+all_my_shipments = ShipHawk::Api::Shipments.all
+paginated = ShipHawk::Api::Shipments.all(:page => 1, :per_page => 10)
+shipment_by_id = ShipHawk::Api::Shipments.retrieve('1069967')
+bol_url = ShipHawk::Api::Shipments.get_bol_url('1069967')
+tracking = ShipHawk::Api::Shipments.get_tracking('1069967')
+notes = ShipHawk::Api::Shipments.get_notes('1069967')
+address_labels = ShipHawk::Api::Shipments.get_address_labels('1069967')
 ```
 
 And 20+ more cool things to do with shipments, see here: **[Shipments End Points](https://github.com/ShipHawk/shiphawk-ruby/blob/superior_branch/lib/shiphawk/api/shipments.rb)**
 #### Dispatches
 
 ```ruby
-ShipHawk::Api::Dispatches::create_dispatch(
+ShipHawk::Api::Dispatches.create_dispatch(
 	:shipment_id => 1082268,
 	:pickup_start_time => "2015-12-11T00:42:09Z",
 	:pickup_end_time => "2015-12-13T00:42:09Z",
@@ -321,7 +325,7 @@ Track a Shipment
 
 
 ```ruby
-tracking_info = ShipHawk::Api::Public::shipment_tracking_info(
+tracking_info = ShipHawk::Api::Public.shipment_tracking_info(
 	:code => 'mxd',
 	:tracking_number => '3434343434'
 )
@@ -333,7 +337,7 @@ status_updates = tracking_info.status_updates
 If you've forgotten the tracking number, you can access it via the Shipments end point.
 
 ```ruby
-tracking_number = ShipHawk::Api::Shipments::retrieve('1069967').details.tracking_number
+tracking_number = ShipHawk::Api::Shipments.retrieve('1069967').details.tracking_number
 ```
 ---
 
