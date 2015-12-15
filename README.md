@@ -320,6 +320,12 @@ ShipHawk::Api::Dispatches.create_dispatch(
 
 **[Network Locations End Points](https://github.com/ShipHawk/shiphawk-ruby/blob/superior_branch/lib/shiphawk/api/network_locations.rb)**
 
+#### Carriers
+
+```ruby
+carrier_logos = ShipHawk::Api::Carriers.logos
+my_carrier_credentials = ShipHawk::Api::Carriers.credentials
+```
 
 #### Public (Auth not required)
 
@@ -329,9 +335,15 @@ Track a Shipment
 
 
 ```ruby
-tracking_info = ShipHawk::Api::Public.shipment_tracking_info(
+# trak by carrier code and tracking number
+tracking_info = ShipHawk::Api::Public.track(
 	:code => 'mxd',
 	:tracking_number => '3434343434'
+)
+
+# track by shipment id
+tracking_info = ShipHawk::Api::Public.track(
+	:id => '1069967'
 )
 
 status = tracking_info.status

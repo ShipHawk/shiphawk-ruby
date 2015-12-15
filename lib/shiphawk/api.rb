@@ -8,6 +8,9 @@ require 'shiphawk/api/items'
 require 'shiphawk/api/zip_codes'
 require 'shiphawk/api/network_locations'
 require 'shiphawk/api/dispatches'
+require 'shiphawk/api/carriers'
+require 'shiphawk/api/products'
+require 'shiphawk/api/categories'
 require 'shiphawk/api/public'
 
 module ShipHawk
