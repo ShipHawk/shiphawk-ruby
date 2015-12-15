@@ -16,7 +16,7 @@ module ShipHawk
       #         [ pickup_end_time ], string, required ex. "2015-12-13T00:42:09Z",
       #         [ instructions ], string optional
 
-      def self.create_dispatch(params={})
+      def self.build(params={})
         response, api_key = ShipHawk::Client.request(:post, '/dispatches', @api_key, params)
         ShipHawk::Helpers::Util::convert_to_ShipHawk_object(response, api_key) if response
       end

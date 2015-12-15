@@ -228,7 +228,7 @@ to_zip   =  destination_address['zip']
 Now we have the minimum requirements to get Rates
 
 ```ruby
-rates = ShipHawk::Api::Rates.create_rates(
+rates = ShipHawk::Api::Rates.build(
 	"to_zip" => to_zip,
 	"from_zip" => from_zip,
 	"items" => items_cart
@@ -311,7 +311,7 @@ And 20+ more cool things to do with shipments, see here: **[Shipments End Points
 #### Dispatches
 
 ```ruby
-ShipHawk::Api::Dispatches.create_dispatch(
+ShipHawk::Api::Dispatches.build(
 	:shipment_id => 1082268,
 	:pickup_start_time => "2015-12-11T00:42:09Z",
 	:pickup_end_time => "2015-12-13T00:42:09Z",
@@ -332,9 +332,57 @@ my_carrier_credentials = ShipHawk::Api::Carriers.credentials
 #### Products
 
 ```ruby
+# retrieve a product
 product_sku = '123123123'
 product = ShipHawk::Api::Products.find_by('1123123')
+
+# create a product
+
+# NOTE: In order to create a product, we first need a Category to store it in and our account_id
+categories = ShipHawk::Api::Categories.find_all
+category = categories.first.category
+account_id = categories.account_id
+
+#if you don't have any categories, you can create one like this:
+new_category = ShipHawk::Api::Categories.build(
+    :account_id => nil,
+    :category => "Fiction",
+    :parent_category => "Books",
+    :name => "Tropic of Cancer",
+    :path => "books/fiction",
+    :url => "http://amzn.com/B002VH3AMK"
+)
+
+# Now you can create a Product using the new_category we created and our account_id:
+
+category_name = new_category.category
+
+product = ShipHawk::Api::Products.build(
+    :product_sku => 'B002VH3AMK',
+    :product_name_title => "Tropic of Cancer",
+    :long_description => "Tropic of Cancer (Paperback)",
+    :package_type => 'Box',
+    :packing_code => '1213123',
+    :account_id => account_id,
+    :product_url => 'http://amzn.com/B002VH3AMK',
+    :rh_category => 'Fiction',
+    :standard_price => 19.99,
+    :product_condition => 'excellent',
+    :product_height => 1.2,
+    :product_width => 4.2,
+    :product_length => 4.4,
+    :product_weight => 2.2
+)
+
+# Now let's make sure our product was created. We can find it by product_sku.
+
+product_sku = product.product_sku
+new_product = ShipHawk::Api::Products.find_by(product_sku)
+ 
+
 ```
+
+
 #### Public (Auth not required)
 
 Track a Shipment

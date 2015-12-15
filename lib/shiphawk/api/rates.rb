@@ -14,7 +14,7 @@ module ShipHawk
       #         [ to_zip ], string, required
       #         [ from_zip ], string, require
 
-      def self.create_rates(params={})
+      def self.build(params={})
         api_key = ShipHawk::Client.api_key
         api_base = ShipHawk::Client.api_base
         params = {}.merge(params)
