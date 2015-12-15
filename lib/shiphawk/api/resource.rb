@@ -34,7 +34,7 @@ module ShipHawk
         ShipHawk::Helpers::Util.convert_to_ShipHawk_object(response, api_key)
       end
 
-      def self.retrieve(id, api_key=nil)
+      def self.find(id, api_key=nil)
         instance = self.new(id, api_key)
         instance.refresh
         instance

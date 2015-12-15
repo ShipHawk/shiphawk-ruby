@@ -284,7 +284,7 @@ zip_query = ShipHawk::Api::ZipCodes.search(:q => '90210')
 #### Items
 
 ```ruby
-item_by_id = ShipHawk::Api::Items.retrieve('942')
+item_by_id = ShipHawk::Api::Items.find('942')
 item_query = ShipHawk::Api::Items.search(:q => 'Aston Martin')
 all_items  = ShipHawk::Api::Items.all
 paginated  = ShipHawk::Api::Items.all(:page => 1, :per_page => 100)
@@ -294,7 +294,7 @@ paginated  = ShipHawk::Api::Items.all(:page => 1, :per_page => 100)
 ```ruby
 all_my_shipments = ShipHawk::Api::Shipments.all
 paginated = ShipHawk::Api::Shipments.all(:page => 1, :per_page => 10)
-shipment_by_id = ShipHawk::Api::Shipments.retrieve('1069967')
+shipment_by_id = ShipHawk::Api::Shipments.find('1069967')
 bol_url = ShipHawk::Api::Shipments.get_bol_url('1069967')
 tracking = ShipHawk::Api::Shipments.get_tracking('1069967')
 notes = ShipHawk::Api::Shipments.get_notes('1069967')
@@ -337,7 +337,7 @@ status_updates = tracking_info.status_updates
 If you've forgotten the tracking number, you can access it via the Shipments end point.
 
 ```ruby
-tracking_number = ShipHawk::Api::Shipments.retrieve('1069967').details.tracking_number
+tracking_number = ShipHawk::Api::Shipments.find('1069967').details.tracking_number
 ```
 ---
 
