@@ -348,7 +348,7 @@ new_category = ShipHawk::Api::Categories.build(
     :account_id => nil,
     :category => "Fiction",
     :parent_category => "Books",
-    :name => "Tropic of Cancer",
+    :name => "Books - Fiction",
     :path => "books/fiction",
     :url => "http://amzn.com/B002VH3AMK"
 )
