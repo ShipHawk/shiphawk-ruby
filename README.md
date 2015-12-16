@@ -303,22 +303,23 @@ paginated  = ShipHawk::Items.all(:page => 1, :per_page => 100)
 ```ruby
 all_my_shipments = ShipHawk::Shipments.all
 paginated = ShipHawk::Shipments.all(:page => 1, :per_page => 10)
-shipment_by_id = ShipHawk::Shipments.find('1069967')
-bol_url = ShipHawk::Shipments.get_bol_url('1069967')
-tracking = ShipHawk::Shipments.get_tracking('1069967')
-notes = ShipHawk::Shipments.get_notes('1069967')
-address_labels = ShipHawk::Shipments.get_address_labels('1069967')
+shipment_by_id = ShipHawk::Shipments.find('1019314')
+bol_url = ShipHawk::Shipments.get_bol_url('1019314')
+tracking = ShipHawk::Shipments.get_tracking('1019314')
+notes = ShipHawk::Shipments.get_notes('1019314')
+address_labels = ShipHawk::Shipments.get_address_labels('1019314')
 ```
 
 And 20+ more cool things to do with shipments, see here: **[Shipments End Points](https://github.com/ShipHawk/shiphawk-ruby/blob/superior_branch/lib/shiphawk/api/shipments.rb)**
 #### Dispatches
 
 ```ruby
-ShipHawk::Api::Dispatches.build(
-	:shipment_id => 1082268,
+ShipHawk::Dispatches.build(
+	:shipment_id => '1019314',
 	:pickup_start_time => "2015-12-11T00:42:09Z",
 	:pickup_end_time => "2015-12-13T00:42:09Z",
-	:dispatch_instructions => 'pick up package on back porch. Beware dog.' )
+	:dispatch_instructions => 'pick up package on back porch. Beware dog.' 
+)
 ```
 
 #### Network Locations
@@ -342,8 +343,8 @@ product = ShipHawk::Products.find_by(product_sku)
 # create a product
 
 # NOTE: In order to create a product, we first need a Category to store it in and our account_id
-categories = ShipHawk::Categories.find_all
-category = categories.first.category
+all_categories = ShipHawk::Categories.find_all
+category = all_categories.categories.first.category
 account_id = categories.account_id
 
 #if you don't have any categories, you can create one like this:
@@ -398,7 +399,7 @@ tracking_info = ShipHawk::Public.track(
 
 # track by shipment id
 tracking_info = ShipHawk::Public.track(
-	:id => '1069967'
+	:id => '1019314'
 )
 
 status = tracking_info.status
@@ -408,7 +409,7 @@ status_updates = tracking_info.status_updates
 If you've forgotten the tracking number, you can access it via the Shipments end point.
 
 ```ruby
-tracking_number = ShipHawk::Shipments.find('1069967').details.tracking_number
+tracking_number = ShipHawk::Shipments.find('1019314').details.tracking_number
 ```
 ---
 

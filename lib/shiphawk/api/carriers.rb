@@ -12,7 +12,7 @@ module ShipHawk
       ShipHawk::Util::convert_to_ShipHawk_object(response, api_key) if response
     end
 
-    def self.logo(params={})
+    def self.logos(params={})
       response, api_key = ShipHawk::ApiClient.request(:get, '/carriers/logo', @api_key, params)
       ShipHawk::Util::convert_to_ShipHawk_object(response, api_key) if response
     end
