@@ -23,7 +23,7 @@ Import the ShipHawk client into your application by adding these lines:
 
 ```
 require 'shipawk'
-ShipHawk::Client::api_key =  'YOUR_API_KEY'
+ShipHawk.configure.api_key =  'YOUR_API_KEY'
 ```
 ---
 
@@ -55,35 +55,43 @@ That's it. Now you have complete access to the ShipHawk API from your console. W
 #### Step 2:  Authorize your Client.
 Copy and paste the line below into your console. Be sure to use the Api Key you were provided with.
 ```ruby
-ShipHawk::Client::api_key = 'YOUR_API_KEY'
+ShipHawk.configure.api_key = 'YOUR_PRODUCTION_API_KEY'
 
 # You're welcome try out our Api in our Sandbox environment
-ShipHawk::Client::api_key = '11bd9df428a442d8631125b6ade175f9'
+ShipHawk.configure.api_key = '11bd9df428a442d8631125b6ade175f9'
 
 #Note: Once you've updated your Api Key to Sand Box, you'll need to update your api base url to match the corresponding environment:
 ```ruby
 # to use the SandBox environment
-ShipHawk::Client::api_base = ShipHawk::Client::SANDBOX_API_HOST
+ShipHawk.configure.host = ShipHawk.configure.sandbox
 
 # and to switch back to Production:
-ShipHawk::Client::api_base = ShipHawk::Client::PRODUCTION_API_HOST
-ShipHawk::Client::api_key = 'YOUR_PRODUCTION_API_KEY'
+ShipHawk.configure.api_key = 'YOUR_PRODUCTION_API_KEY'
+ShipHawk.configure.host = ShipHawk.configure.production
 ```
 
 Once you've authorized your Client, you can view all of your account Api Keys like so:
 ```ruby
-api_keys = ShipHawk::Api::ApiKeys.all
+api_keys = ShipHawk::ApiKeys.all
+```
+You can also configure the host, version, and the api_key you'd like to use all at once like this:
+```ruby
+ShipHawk.configure do |config|
+  config.api_key = '11bd9df428a442d8631125b6ade175f9'
+  config.host = 'shiphawk.com'
+  config.api_version = 'v4'
+end
 ```
 
 If you think your Api Key has been compromised, you can quickly regenerate a new one on the fly:
 ```ruby
 # regenerate an Api Key for your SandBox environment
-sandbox_api_key = ShipHawk::Api::ApiKeys.regenerate_sandbox
-ShipHawk::Client::api_key = sandbox_api_key['test_token']
+sandbox_api_key = ShipHawk::ApiKeys.regenerate_sandbox
+ShipHawk::ApiClient::api_key = sandbox_api_key['test_token']
 
 # regenerate an Api Key for your Production environment
-production_api_key = ShipHawk::Api::ApiKeys.regenerate_production
-ShipHawk::Client::api_key = production_api_key['token']
+production_api_key = ShipHawk::ApiKeys.regenerate_production
+ShipHawk::ApiClient::api_key = production_api_key['token']
 ```
 Don't have an Api Key? *( contact alex.hawkins@shiphawk.com for more information about obtaining one )*
 
@@ -92,8 +100,8 @@ Don't have an Api Key? *( contact alex.hawkins@shiphawk.com for more information
 **Note**: Address and Parcel creation via our Ruby Client will be available with the release of **V4**. For now, let's just create an Address using our search endpoint.
 
 ```ruby
-origin_address      = ShipHawk::Api::Addresses.search(q: '90210').first['address']
-destination_address = ShipHawk::Api::Addresses.search(q: '92115').first['address']
+origin_address      = ShipHawk::Addresses.search(q: '90210').first['address']
+destination_address = ShipHawk::Addresses.search(q: '92115').first['address']
 ```
 **Special Note**: If you haven't added any addresses to your address book yet, you won't be able use our address search end point. You can create your addresses manually(see below). Once you've booked your shipment, each address(destination & origin) will be added to your address book and become searchable.
 ```ruby
@@ -142,8 +150,8 @@ items_cart = []
 Let's assume the item we're shipping is **unpacked**. Now we'll query ShipHawk's product database to find our unpacked item.
 
 ```ruby
-all_sofas = ShipHawk::Api::Items.search(:q => 'sofa')
-all_rings = ShipHawk::Api::Items.search(:q => 'ring')
+all_sofas = ShipHawk::Items.search(:q => 'sofa')
+all_rings = ShipHawk::Items.search(:q => 'ring')
 ```
 
 For the sake of simplicity, we're only going to deal with 1 item here. And we're going to select the first item that is returned and save it to a variable called `sofa`.
@@ -192,7 +200,7 @@ value   = 10
 This gives us enough information to create an item object.
 
 ```ruby
-sofa = ShipHawk::Api::Items.item_object(
+sofa = ShipHawk::Items.item_object(
   	item_id,
   	length,
   	width,
@@ -222,7 +230,7 @@ to_zip   =  destination_address['zip']
 Now we have the minimum requirements to get Rates
 
 ```ruby
-rates = ShipHawk::Api::Rates.build(
+rates = ShipHawk::Rates.build(
 	"to_zip" => to_zip,
 	"from_zip" => from_zip,
 	"items" => items_cart
@@ -255,7 +263,7 @@ pickup_start_time = "2015-12-29 19:00:00"
 We now have everything we need to book our first shipment. Cool.
 
 ```ruby
-shipment = ShipHawk::Api::Shipments.book(
+shipment = ShipHawk::Shipments.book(
 	:rate_id => rate_id,
 	:pickup=>[{:start_time=>pickup_start_time}], 
 	:origin_address => origin_address,
@@ -264,7 +272,7 @@ shipment = ShipHawk::Api::Shipments.book(
 
 # Finally, let's check to see if our shipment was booked. We should be able to find it in the ShipHawk DB.
 shipment_id = shipment.details.id.to_s
-booked_shipment = ShipHawk::Api::Shipments.find(shipment_id)
+booked_shipment = ShipHawk::Shipments.find(shipment_id)
 ```
 ----
 
@@ -276,29 +284,29 @@ Other Cool Things you can do with our Client
 #### Zip Codes
 
 ```ruby
-all_zips = ShipHawk::Api::ZipCodes.all
-paginated_zips = ShipHawk::Api::ZipCodes.all(:page => 1, :per_page => 20)
-zip_query = ShipHawk::Api::ZipCodes.search(:q => '90210')
+all_zips = ShipHawk::ZipCodes.all
+paginated_zips = ShipHawk::ZipCodes.all(:page => 1, :per_page => 20)
+zip_query = ShipHawk::ZipCodes.search(:q => '90210')
 ```
 
 #### Items
 
 ```ruby
-item_by_id = ShipHawk::Api::Items.find('942')
-item_query = ShipHawk::Api::Items.search(:q => 'Aston Martin')
-all_items  = ShipHawk::Api::Items.all
-paginated  = ShipHawk::Api::Items.all(:page => 1, :per_page => 100)
+item_by_id = ShipHawk::Items.find('942')
+item_query = ShipHawk::Items.search(:q => 'Aston Martin')
+all_items  = ShipHawk::Items.all
+paginated  = ShipHawk::Items.all(:page => 1, :per_page => 100)
 ```
 #### Shipments
 
 ```ruby
-all_my_shipments = ShipHawk::Api::Shipments.all
-paginated = ShipHawk::Api::Shipments.all(:page => 1, :per_page => 10)
-shipment_by_id = ShipHawk::Api::Shipments.find('1069967')
-bol_url = ShipHawk::Api::Shipments.get_bol_url('1069967')
-tracking = ShipHawk::Api::Shipments.get_tracking('1069967')
-notes = ShipHawk::Api::Shipments.get_notes('1069967')
-address_labels = ShipHawk::Api::Shipments.get_address_labels('1069967')
+all_my_shipments = ShipHawk::Shipments.all
+paginated = ShipHawk::Shipments.all(:page => 1, :per_page => 10)
+shipment_by_id = ShipHawk::Shipments.find('1069967')
+bol_url = ShipHawk::Shipments.get_bol_url('1069967')
+tracking = ShipHawk::Shipments.get_tracking('1069967')
+notes = ShipHawk::Shipments.get_notes('1069967')
+address_labels = ShipHawk::Shipments.get_address_labels('1069967')
 ```
 
 And 20+ more cool things to do with shipments, see here: **[Shipments End Points](https://github.com/ShipHawk/shiphawk-ruby/blob/superior_branch/lib/shiphawk/api/shipments.rb)**
@@ -319,8 +327,8 @@ ShipHawk::Api::Dispatches.build(
 #### Carriers
 
 ```ruby
-carrier_logos = ShipHawk::Api::Carriers.logos
-my_carrier_credentials = ShipHawk::Api::Carriers.credentials
+carrier_logos = ShipHawk::Carriers.logos
+my_carrier_credentials = ShipHawk::Carriers.credentials
 ```
 
 #### Products
@@ -328,17 +336,17 @@ my_carrier_credentials = ShipHawk::Api::Carriers.credentials
 ```ruby
 # retrieve a product ( this will only work if you have created products. see next step )
 product_sku = 'B002VH3AMK'
-product = ShipHawk::Api::Products.find_by(product_sku)
+product = ShipHawk::Products.find_by(product_sku)
 
 # create a product
 
 # NOTE: In order to create a product, we first need a Category to store it in and our account_id
-categories = ShipHawk::Api::Categories.find_all
+categories = ShipHawk::Categories.find_all
 category = categories.first.category
 account_id = categories.account_id
 
 #if you don't have any categories, you can create one like this:
-new_category = ShipHawk::Api::Categories.build(
+new_category = ShipHawk::Categories.build(
     :account_id => nil,
     :category => "Fiction",
     :parent_category => "Books",
@@ -350,7 +358,7 @@ new_category = ShipHawk::Api::Categories.build(
 # Now you can create a Product using the new_category we created and your account_id:
 category_name = new_category.category
 
-product = ShipHawk::Api::Products.build(
+product = ShipHawk::Products.build(
     :product_sku => 'B002VH3AMK',
     :product_name_title => "Tropic of Cancer",
     :long_description => "Tropic of Cancer (Paperback)",
@@ -369,7 +377,7 @@ product = ShipHawk::Api::Products.build(
 
 # Now let's make sure our product was created. We can find it by product_sku.
 product_sku = product.product_sku
-new_product = ShipHawk::Api::Products.find_by(product_sku)
+new_product = ShipHawk::Products.find_by(product_sku)
 
 ```
 
@@ -382,13 +390,13 @@ Track a Shipment
 
 ```ruby
 # trak by carrier code and tracking number
-tracking_info = ShipHawk::Api::Public.track(
+tracking_info = ShipHawk::Public.track(
 	:code => 'mxd',
 	:tracking_number => '3434343434'
 )
 
 # track by shipment id
-tracking_info = ShipHawk::Api::Public.track(
+tracking_info = ShipHawk::Public.track(
 	:id => '1069967'
 )
 
@@ -399,7 +407,7 @@ status_updates = tracking_info.status_updates
 If you've forgotten the tracking number, you can access it via the Shipments end point.
 
 ```ruby
-tracking_number = ShipHawk::Api::Shipments.find('1069967').details.tracking_number
+tracking_number = ShipHawk::Shipments.find('1069967').details.tracking_number
 ```
 ---
 

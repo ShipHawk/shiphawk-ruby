@@ -1,4 +1,4 @@
-# Shiphawk::Client Gem Examples
+# ShipHawk::ApiClient Gem Examples
 
 ## Client Initialization
 
@@ -9,10 +9,10 @@ To make a connection to a ShipHawk server, create a Client connection:
     require 'shiphawk'
 
     # get an item based on item id
-    client = Shiphawk::Client.new(api_token: 'api_token')
+    client = ShipHawk::ApiClient.new(api_token: 'api_token')
 ```
 
-Shiphawk::Client initialize takes a parameter hash to configure a connection. The parameters hash can consistent of:
+ShipHawk::ApiClient initialize takes a parameter hash to configure a connection. The parameters hash can consistent of:
 
 ```ruby
     PRODUCTION_API_HOST = 'https://shiphawk.com'
@@ -28,14 +28,14 @@ Shiphawk::Client initialize takes a parameter hash to configure a connection. Th
 
 ### Item retrieval
 
-Here's an example of retrieving an Item given the Item ID using the Shiphawk::Client API
+Here's an example of retrieving an Item given the Item ID using the ShipHawk::ApiClient API
 
 ```ruby
     require 'rubygems'
     require 'shiphawk'
 
     # get an item based on item id
-    client = Shiphawk::Client.new(api_token: 'api_token')
+    client = ShipHawk::ApiClient.new(api_token: 'api_token')
     client.items_show 2335
 ```
 
@@ -46,7 +46,7 @@ Here's an example of retrieving an Item given the Item ID using the Shiphawk::Cl
     require 'shiphawk'
 
     # get an item based on item id
-    client = Shiphawk::Client.new(api_token: 'api_token')
+    client = ShipHawk::ApiClient.new(api_token: 'api_token')
 ```
 
 ## Products
@@ -56,7 +56,7 @@ Here's an example of retrieving an Item given the Item ID using the Shiphawk::Cl
     require 'shiphawk'
 
     # get an item based on item id
-    client = Shiphawk::Client.new(api_token: 'api_token')
+    client = ShipHawk::ApiClient.new(api_token: 'api_token')
 ```
 
 ## Rates
@@ -68,7 +68,7 @@ Creating a quote
     require 'rubygems'
     require 'shiphawk'
 
-    client = Shiphawk::Client.new(api_token: 'api_token')
+    client = ShipHawk::ApiClient.new(api_token: 'api_token')
 
     custom_attributes = {
       value: declared_value_per_lot, quantity: lot_size, id: shiphawk_item_id,
