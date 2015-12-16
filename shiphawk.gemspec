@@ -21,12 +21,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'rest-client', '~> 1.8.0'
   spec.add_dependency 'multi_json', '>= 1.11.2'
-  spec.add_dependency 'faraday'
-  spec.add_dependency 'faraday_middleware'
-  spec.add_dependency 'faraday-conductivity'
-  spec.add_dependency 'httpclient'
-  spec.add_dependency 'typhoeus'
-  spec.add_dependency 'em-http-request'
   spec.add_development_dependency 'bundler', '~> 1.10.6'
   spec.add_development_dependency 'rake', '~> 10.4.2'
   spec.add_development_dependency 'rspec', '~> 2.99.0'

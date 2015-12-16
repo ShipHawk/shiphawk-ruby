@@ -57,20 +57,10 @@ Copy and paste the line below into your console. Be sure to use the Api Key you 
 ```ruby
 ShipHawk::Client::api_key = 'YOUR_API_KEY'
 
-# You're welcome to use the ShipHawk testing environment Api Key as well
+# You're welcome try out our Api in our Sandbox environment
+ShipHawk::Client::api_key = '11bd9df428a442d8631125b6ade175f9'
 
-ShipHawk::Client::api_key = 'b7f2ca506fc8f91d3d6a067c1097fb16'
-```
-
-Once you've authorized your Client, you can view all of your account Api Keys like so:
-```ruby
-api_keys = ShipHawk::Api::ApiKeys.all
-```
-To change your Api Key for use with the SandBox testing environment:
-```ruby
-ShipHawk::Client::api_key = api_keys.test_token
-```
-**Note**: Once you've updated your Api Key, you'll need to update your api base url to match the corresponding environment:
+#Note: Once you've updated your Api Key to Sand Box, you'll need to update your api base url to match the corresponding environment:
 ```ruby
 # to use the SandBox environment
 ShipHawk::Client::api_base = ShipHawk::Client::SANDBOX_API_HOST
@@ -79,6 +69,12 @@ ShipHawk::Client::api_base = ShipHawk::Client::SANDBOX_API_HOST
 ShipHawk::Client::api_base = ShipHawk::Client::PRODUCTION_API_HOST
 ShipHawk::Client::api_key = 'YOUR_PRODUCTION_API_KEY'
 ```
+
+Once you've authorized your Client, you can view all of your account Api Keys like so:
+```ruby
+api_keys = ShipHawk::Api::ApiKeys.all
+```
+
 If you think your Api Key has been compromised, you can quickly regenerate a new one on the fly:
 ```ruby
 # regenerate an Api Key for your SandBox environment
@@ -206,7 +202,6 @@ sofa = ShipHawk::Api::Items.item_object(
   	value,
 )
 ```
-
 **Note:** Repeat this process for multiple items if you'd like.
 
 #### Step 5: Add Items to your cart
@@ -224,7 +219,6 @@ In order to get Rates, we need a `to_zip`, `from_zip`, and our `items_cart`. We 
 from_zip =  origin_address['zip']
 to_zip   =  destination_address['zip']
 ```
-
 Now we have the minimum requirements to get Rates
 
 ```ruby
@@ -378,7 +372,6 @@ product_sku = product.product_sku
 new_product = ShipHawk::Api::Products.find_by(product_sku)
 
 ```
-
 
 #### Public (Auth not required)
 
