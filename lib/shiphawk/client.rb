@@ -3,7 +3,7 @@ module ShipHawk
     extend self
     DEFAULT_API_VERSION = 'v3'
     PRODUCTION_API_HOST = 'https://shiphawk.com/api/v3'
-    SANDBOX_API_HOST = 'https://sandbox.shiphawk.com/api/v3'
+    SANDBOX_API_HOST = 'https://166.78.38.106/api/v3'
     OPEN_TIMEOUT = 30
     TIMEOUT = 60
     SSL_VERSION = 'TLSv1'
