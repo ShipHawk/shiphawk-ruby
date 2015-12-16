@@ -3,7 +3,7 @@ module ShipHawk
     extend self
     DEFAULT_API_VERSION = 'v3'
     PRODUCTION_API_HOST = 'https://shiphawk.com/api/v3'
-    SANDBOX_API_HOST = 'https://166.78.38.106/api/v3'
+    SANDBOX_API_HOST = 'https://sandbox.shiphawk.com/api/v3'
     OPEN_TIMEOUT = 30
     TIMEOUT = 60
     SSL_VERSION = 'TLSv1'
@@ -56,7 +56,7 @@ module ShipHawk
     end
 
     def request(method, url, api_key, params={}, headers={}, x_api_key=false)
-      headers = {:x_api_key => @api_key.to_s} if x_api_key
+      headers = {:x_api_key => @api_key} if x_api_key
       api_key ||= @api_key
       raise Error.new('No API key provided.') unless api_key
       params = ShipHawk::Helpers::Util.objects_to_ids(params)
