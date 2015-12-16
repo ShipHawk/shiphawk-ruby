@@ -14,18 +14,20 @@ module ShipHawk
       ShipHawk::Util::convert_to_ShipHawk_object(response, api_key) if response
     end
 
-    def self.item_object(l=nil,w=nil,h=nil,lbs=nil,id=nil,packed=false,value=nil)
-      {
-        "length" => l,
-        "width" => w,
-        "height" => h,
-        "weight" => lbs,
-        "packed" => packed,
-        "id" => id.to_s,
-        "value" => value
-      }
+    def self.item_object(items)
+     JSON.parse(items.to_json)
     end
 
   end
 
 end
+
+
+[{"id"=>"1265", "xid"=>"1123123", "length"=>10.0, "width"=>10.0, "height"=>10.0, "weight"=>6.024096385542169, "value"=>100.0, "quantity"=>1, "packed"=>false, "require_crating"=>false, "description"=>"Product 1", "package_qty"=>1}]
+
+[{:id=>1265, :xid=>1, :length=>10.0, :width=>10.0, :height=>10.0, :weight=>6.024096385542169, :value=>100.0, :quantity=>1, :packed=>false, :require_crating=>false, :description=>"Product 1", :package_type=>"unpacked", :package_qty=>1}]
+rates = ShipHawk::Rates.build(
+    "to_zip" => to_zip,
+    "from_zip" => from_zip,
+    "items" => items
+)
