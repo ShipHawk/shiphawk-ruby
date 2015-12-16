@@ -40,7 +40,7 @@ First we'll clone the shiphawk-ruby repo to our local machine. At the command li
 
 
 ```
-git clone -b superior_branch --single-branch https://github.com/ShipHawk/shiphawk-ruby.git
+git clone -b shiphawk-irb-branch --single-branch https://github.com/ShipHawk/shiphawk-ruby.git
 cd shiphawk-ruby
 bundle
 ```
