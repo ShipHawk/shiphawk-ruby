@@ -60,8 +60,8 @@ ShipHawk.configure.api_key = 'YOUR_PRODUCTION_API_KEY'
 # Don't have an api key? Learn about our API in ShipHawk's Sandbox environment
 ShipHawk.configure.api_key = '11bd9df428a442d8631125b6ade175f9'
 
-#Note: Once you've updated your Api Key to Sandbox, 
-you'll need to update your host to match the corresponding environment:
+# Note: Once you've updated your Api Key to Sandbox, 
+# you'll need to update your host to match the corresponding environment:
 
 # to use the SandBox environment
 ShipHawk.configure.host = ShipHawk.configure.sandbox
