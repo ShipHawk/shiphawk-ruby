@@ -79,7 +79,7 @@ You can also configure the host, version, and your api_key at the same time:
 ```ruby
 ShipHawk.configure do |config|
   config.api_key = '11bd9df428a442d8631125b6ade175f9'
-  config.host = 'shiphawk.com'
+  config.host = 'sandbox.shiphawk.com'
   config.api_version = 'v3'
 end
 ```
