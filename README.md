@@ -272,7 +272,7 @@ shipment = ShipHawk::Shipments.book(
 )
 
 # Finally, let's check to see if our shipment was booked. We should be able to find it in the ShipHawk DB.
-shipment_id = shipment.details.id.to_s
+shipment_id = shipment['details']['id'].to_s
 booked_shipment = ShipHawk::Shipments.find(shipment_id)
 ```
 ----
