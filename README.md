@@ -57,11 +57,12 @@ Copy and paste the line below into your console. Be sure to use the Api Key you 
 ```ruby
 ShipHawk.configure.api_key = 'YOUR_PRODUCTION_API_KEY'
 
-# You're welcome try out our Api in our Sandbox environment
+# Don't have an api key? Learn about our API in ShipHawk's Sandbox environment
 ShipHawk.configure.api_key = '11bd9df428a442d8631125b6ade175f9'
 
-#Note: Once you've updated your Api Key to Sand Box, you'll need to update your api base url to match the corresponding environment:
-```ruby
+#Note: Once you've updated your Api Key to Sandbox, 
+you'll need to update your host to match the corresponding environment:
+
 # to use the SandBox environment
 ShipHawk.configure.host = ShipHawk.configure.sandbox
 
@@ -70,16 +71,16 @@ ShipHawk.configure.api_key = 'YOUR_PRODUCTION_API_KEY'
 ShipHawk.configure.host = ShipHawk.configure.production
 ```
 
-Once you've authorized your Client, you can view all of your account Api Keys like so:
+Once you've authorized your Client, you can view your account Api Keys like this:
 ```ruby
 api_keys = ShipHawk::ApiKeys.all
 ```
-You can also configure the host, version, and the api_key you'd like to use all at once like this:
+You can also configure the host, version, and your api_key at the same time:
 ```ruby
 ShipHawk.configure do |config|
   config.api_key = '11bd9df428a442d8631125b6ade175f9'
   config.host = 'shiphawk.com'
-  config.api_version = 'v4'
+  config.api_version = 'v3'
 end
 ```
 
