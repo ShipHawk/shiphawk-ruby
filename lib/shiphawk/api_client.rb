@@ -9,7 +9,6 @@ module ShipHawk
     def request(method, url, api_key, params={}, headers={}, x_api_key=false)
       headers = {:x_api_key =>  ShipHawk::Configuration.api_key } if x_api_key
       api_key = api_key || ShipHawk::Configuration.api_key
-      puts api_key
       raise Error.new('No API key provided.') unless api_key
       params = ShipHawk::Util.objects_to_ids(params)
       url = ShipHawk::Configuration.base_url + url
