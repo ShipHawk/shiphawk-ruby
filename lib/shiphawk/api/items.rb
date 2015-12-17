@@ -21,13 +21,3 @@ module ShipHawk
   end
 
 end
-
-
-[{"id"=>"1265", "xid"=>"1123123", "length"=>10.0, "width"=>10.0, "height"=>10.0, "weight"=>6.024096385542169, "value"=>100.0, "quantity"=>1, "packed"=>false, "require_crating"=>false, "description"=>"Product 1", "package_qty"=>1}]
-
-[{:id=>1265, :xid=>1, :length=>10.0, :width=>10.0, :height=>10.0, :weight=>6.024096385542169, :value=>100.0, :quantity=>1, :packed=>false, :require_crating=>false, :description=>"Product 1", :package_type=>"unpacked", :package_qty=>1}]
-rates = ShipHawk::Rates.build(
-    "to_zip" => to_zip,
-    "from_zip" => from_zip,
-    "items" => items
-)
