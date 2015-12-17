@@ -19,5 +19,5 @@ module ShipHawk
     end
 
   end
-
 end
+
