@@ -58,7 +58,7 @@ Copy and paste the line below into your console. Be sure to use the Api Key you 
 ShipHawk.configure.api_key = 'YOUR_PRODUCTION_API_KEY'
 
 # Don't have an api key? Learn about our API in ShipHawk's Sandbox environment
-ShipHawk.configure.api_key = '11bd9df428a442d8631125b6ade175f9'
+ShipHawk.configure.api_key = '8b8f60ee7afe8f1f07161bbc7120f25a'
 
 # Note: Once you've updated your Api Key to Sandbox, 
 # you'll need to update your host to match the corresponding environment:
@@ -293,13 +293,14 @@ paginated  = ShipHawk::Items.all(:page => 1, :per_page => 100)
 all_my_shipments = ShipHawk::Shipments.all
 paginated = ShipHawk::Shipments.all(:page => 1, :per_page => 10)
 shipment_by_id = ShipHawk::Shipments.find('1019314')
-bol_url = ShipHawk::Shipments.get_bol_url('1019314')
 tracking = ShipHawk::Shipments.get_tracking('1019314')
 notes = ShipHawk::Shipments.get_notes('1019314')
+
+# NOTE: small parcel shipments do not have address labels or bols
+bol_url = ShipHawk::Shipments.get_bol_url('1019314')
 address_labels = ShipHawk::Shipments.get_address_labels('1019314')
 
 # update a shipment (after editing shipment params, pass in the entire shipment object)
-
 shipment = ShipHawk::Shipments.find('1019314') # get shipment to update
 shipment.details.special_request = 'handle with care'  # edit shipment params
 shipment.details.xid = 'Z123123123'
@@ -323,6 +324,8 @@ bulk_update_status = ShipHawk::Shipments.update_statuses(:shipment_ids=>[1019165
 And 20+ more cool things to do with shipments, see here: **[Shipments End Points](https://github.com/ShipHawk/shiphawk-ruby/blob/superior_branch/lib/shiphawk/api/shipments.rb)**
 #### Dispatches
 
+# only certain carriers are dispatchable. Contact aaron@shiphawk.com for our dispatch list
+# NOTE: Small Parcel carriers do not need to be dispatched assuming that you have a daily pickup.
 ```ruby
 ShipHawk::Dispatches.build(
 	:shipment_id => '1019314',
