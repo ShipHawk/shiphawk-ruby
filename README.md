@@ -342,8 +342,8 @@ ShipHawk::Dispatches.build(
 ```ruby
 # Subscribe to status updates for a shipment
 subscribe = ShipHawk::Shipments.subscribe('1019314', :callback_url => 'https://customer.com/api/shipment_status?api_key=3873')
-
 ```
+
 #### Network Locations
 
 **[Network Locations End Points](https://github.com/ShipHawk/shiphawk-ruby/blob/superior_branch/lib/shiphawk/api/network_locations.rb)**
