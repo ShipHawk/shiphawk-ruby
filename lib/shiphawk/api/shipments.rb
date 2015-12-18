@@ -152,13 +152,19 @@ module ShipHawk
     end
 
     # retrieve the customer notes for a shipment
+
+    #requires :id, type: Integer
     def self.get_notes(shipment_id)
       response, api_key = ShipHawk::ApiClient.request(:get, "/shipments/#{shipment_id}/notes", @api_key)
       ShipHawk::Util::convert_to_ShipHawk_object(response, api_key) if response
     end
 
     # create a customer note for a shipment
-    def self.create_notes(shipment_id, params={})
+
+    # requires :id,   type: Integer
+    # requires :body, type: String
+    # optional :tag,  type: String
+    def self.build_note(shipment_id, params={})
       response, api_key = ShipHawk::ApiClient.request(:post, "/shipments/#{shipment_id}/notes", @api_key, params)
       ShipHawk::Util::convert_to_ShipHawk_object(response, api_key) if response
     end

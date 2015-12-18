@@ -293,7 +293,16 @@ paginated  = ShipHawk::Items.all(:page => 1, :per_page => 100)
 all_my_shipments = ShipHawk::Shipments.all
 paginated = ShipHawk::Shipments.all(:page => 1, :per_page => 10)
 shipment_by_id = ShipHawk::Shipments.find('1019314')
+
+# retrieve the customer notes for a shipment
 notes = ShipHawk::Shipments.get_notes('1019314')
+
+# create a customer note for a shipment
+customer_note = ShipHawk::Shipments.build_note(
+    '1019314', 
+    :tag => 'delivery update', 
+    :body => 'shipment will be delayed'
+)
 
 # retrieve the current status of a shipment
 tracking = ShipHawk::Shipments.get_tracking('1019314')
