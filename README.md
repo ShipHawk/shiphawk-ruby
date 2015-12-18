@@ -322,13 +322,19 @@ bulk_update_status = ShipHawk::Shipments.update_statuses(:shipment_ids=>[1019165
 
 # Note, you cannot update the status of a shipment that has already been cancelled.
 ```
+#### Shipment WebHooks
 
+```ruby
+# Subscribe to status updates for a shipment
+subscribe = ShipHawk::Shipments.subscribe('1019314', :callback_url => 'https://customer.com/api/shipment_status?api_key=3873')
+```
 And 20+ more cool things to do with shipments, see here: **[Shipments End Points](https://github.com/ShipHawk/shiphawk-ruby/blob/superior_branch/lib/shiphawk/api/shipments.rb)**
 #### Dispatches
 
+```ruby
 # only certain carriers are dispatchable. Contact aaron@shiphawk.com for our dispatch list
 # NOTE: Small Parcel carriers do not need to be dispatched assuming that you have a daily pickup.
-```ruby
+
 ShipHawk::Dispatches.build(
 	:shipment_id => '1019314',
 	:pickup_start_time => "2015-12-11T00:42:09Z",
@@ -336,14 +342,6 @@ ShipHawk::Dispatches.build(
 	:dispatch_instructions => 'pick up package on back porch. Beware dog.' 
 )
 ```
-
-#### Shipment WebHooks
-
-```ruby
-# Subscribe to status updates for a shipment
-subscribe = ShipHawk::Shipments.subscribe('1019314', :callback_url => 'https://customer.com/api/shipment_status?api_key=3873')
-```
-
 #### Network Locations
 
 **[Network Locations End Points](https://github.com/ShipHawk/shiphawk-ruby/blob/superior_branch/lib/shiphawk/api/network_locations.rb)**
