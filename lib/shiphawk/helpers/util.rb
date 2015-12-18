@@ -8,7 +8,6 @@ module ShipHawk
         when Hash
           result = {}
           obj.each { |k, v| result[k] = objects_to_ids(v) unless v.nil? }
-          puts result
           result
         when Array
           obj.map { |v| objects_to_ids(v) }

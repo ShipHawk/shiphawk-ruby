@@ -11,15 +11,32 @@ module ShipHawk
     def self.book(params={})
       api_key = ShipHawk.configure.api_key
       api_base = ShipHawk.configure.base_url
-      response = RestClient.post("#{api_base}/shipments?api_key=#{api_key}", params.to_json, :content_type => :json)
-      JSON.parse(response) if response
+      begin
+        response = RestClient.post("#{api_base}/shipments?api_key=#{api_key}", params.to_json, :content_type => :json)
+        puts "Response status: #{response.code}"
+        JSON.parse(response) if response
+      rescue => e
+        JSON.parse(e.response) if e
+      end
+    end
+
+    def self.cancel(shipment_id, params={})
+      response, api_key = ShipHawk::ApiClient.request(:delete, "/shipments/#{shipment_id}", @api_key, params)
+      puts response
+      ShipHawk::Util::convert_to_ShipHawk_object(response, api_key) if response
     end
 
     # update/edit a particular Shipment
     def self.update(shipment_id, params={})
-      response, api_key = ShipHawk::ApiClient.request(:put, "/shipments/#{shipment_id}", @api_key, params)
-      puts response
-      ShipHawk::Util::convert_to_ShipHawk_object(response, api_key) if response
+      api_key = ShipHawk.configure.api_key
+      api_base = ShipHawk.configure.base_url
+      begin
+        response = RestClient.put("#{api_base}/shipments/#{shipment_id}?api_key=#{api_key}", params.to_json, :content_type => :json, :accept => :json)
+        puts "Response status: #{response.code}"
+        self.find(shipment_id) # get updated shipment after update
+      rescue => e
+        JSON.parse(e.response) if e
+      end
     end
 
     # update ITN (Internal Transaction Number) for an international shipment
@@ -27,6 +44,37 @@ module ShipHawk
     def self.update_itn(shipment_id, params={})
       response, api_key = ShipHawk::ApiClient.request(:put, "/shipments/#{shipment_id}", @api_key, params)
       ShipHawk::Util::convert_to_ShipHawk_object(response, api_key) if response
+    end
+
+    # bulk update the status of one or more shipments
+    # requires :shipment_ids,    type: Array[Integer]
+    # requires :status, type: Symbol, values: Shipment::ALL_STATUSES
+
+    # ALL_STATUSES = [
+    #    :ordered,
+    #    :confirmed,
+    #    :scheduled_for_pickup,
+    #    :agent_prep,
+    #    :ready_for_carrier_pickup,
+    #    :in_transit,
+    #    :delivered,
+    #    :exception,
+    #    :cancelled,
+    # ]
+
+    def self.update_statuses(params={})
+      api_key = ShipHawk.configure.api_key
+      api_base = ShipHawk.configure.base_url
+      response = RestClient.put("#{api_base}/shipments/status?api_key=#{api_key}", params.to_json, :content_type => :json, :accept => :json)
+      begin
+        puts "Response status: #{response.code}"
+        params[:shipment_ids].each { |k,v|
+          shipment = self.find(k) # get updated shipment after update
+          puts "Status for Shipment #{k} updated to #{shipment.details.status}" if shipment
+        }
+      rescue => e
+        JSON.parse(e.response) if e
+      end
     end
 
     # get a shipment's BOL pdf url
@@ -102,6 +150,11 @@ module ShipHawk
     def self.get_labels_pdf(shipment_id)
       response, api_key = ShipHawk::ApiClient.request(:get, "/shipments/#{shipment_id}/packages/labels/combined", @api_key)
       ShipHawk::Util::convert_to_ShipHawk_object(response, api_key) if response
+    end
+
+    # regenerates BOL and Address Label with load manifest information
+    def regenerate_shipment_documentation
+
     end
 
     # return a shipment's Commercial Invoice pdf url

@@ -14,11 +14,17 @@ module ShipHawk
     #         [ from_zip ], string, require
 
     def self.build(params={})
-      api_key = ShipHawk.configure.api_key
-      api_base = ShipHawk.configure.base_url
-      params = {}.merge(params)
-      response = RestClient.post("#{api_base}/rates?api_key=#{api_key}", params.to_json, :content_type => :json)
-      JSON.parse(response) if response
+
+      begin
+        api_key = ShipHawk.configure.api_key
+        api_base = ShipHawk.configure.base_url
+        params = {}.merge(params)
+        response = RestClient.post("#{api_base}/rates?api_key=#{api_key}", params.to_json, :content_type => :json)
+        puts "Response status: #{response.code}"
+        JSON.parse(response) if response
+      rescue => e
+        JSON.parse(e.response) if e
+      end
     end
 
     # create a new set of standard rates

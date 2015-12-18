@@ -33,6 +33,7 @@ module ShipHawk
     end
 
     def self.find(id, api_key=nil)
+      id = id.to_s
       instance = self.new(id, api_key)
       instance.refresh
       instance
@@ -45,30 +46,5 @@ module ShipHawk
       ShipHawk::Util.convert_to_ShipHawk_object(response, api_key)
     end
 
-    def delete
-      response, api_key = ShipHawk::ApiClient::request(:delete, url, @api_key)
-      refresh_from(response, api_key)
-      self
-    end
-
-    def save
-      if @unsaved_values.length > 0
-        values = {}
-        @unsaved_values.each { |k| values[k] = @values[k] }
-
-        for key in @unsaved_values
-          value = values[key]
-          if value.is_a?(ShipHawk::ShipHawkObject)
-            values[key] = value.flatten_unsaved
-          end
-        end
-
-        wrapped_params = {self.class.class_name => values}
-
-        response, api_key = ShipHawk::ApiClient::request(:put, url, @api_key, wrapped_params)
-        refresh_from(response, api_key)
-      end
-      self
-    end
   end
 end

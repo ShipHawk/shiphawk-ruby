@@ -20,4 +20,3 @@ module ShipHawk
 
   end
 end
-

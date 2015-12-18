@@ -40,7 +40,7 @@ First we'll clone the shiphawk-ruby repo to our local machine. At the command li
 
 
 ```
-git clone -b shiphawk-irb-branch --single-branch https://github.com/ShipHawk/shiphawk-ruby.git
+git clone -b  --single-branch https://github.com/ShipHawk/shiphawk-ruby.git
 cd shiphawk-ruby
 bundle
 ```
@@ -78,22 +78,12 @@ api_keys = ShipHawk::ApiKeys.all
 You can also configure the host, version, and your api_key at the same time:
 ```ruby
 ShipHawk.configure do |config|
-  config.api_key = '11bd9df428a442d8631125b6ade175f9'
+  config.api_key = '8b8f60ee7afe8f1f07161bbc7120f25a'
   config.host = 'sandbox.shiphawk.com'
   config.api_version = 'v3'
 end
 ```
 
-If you think your Api Key has been compromised, you can quickly regenerate a new one on the fly:
-```ruby
-# regenerate an Api Key for your SandBox environment
-sandbox_api_key = ShipHawk::ApiKeys.regenerate_sandbox
-ShipHawk::ApiClient::api_key = sandbox_api_key['test_token']
-
-# regenerate an Api Key for your Production environment
-production_api_key = ShipHawk::ApiKeys.regenerate_production
-ShipHawk::ApiClient::api_key = production_api_key['token']
-```
 Don't have an Api Key? *( contact alex.hawkins@shiphawk.com for more information about obtaining one )*
 
 #### Step 3:  Set the Origin and Destination Address
@@ -262,7 +252,6 @@ pickup_start_time = "2015-12-29 19:00:00"
 ```
 
 We now have everything we need to book our first shipment. Cool.
-
 ```ruby
 shipment = ShipHawk::Shipments.book(
 	:rate_id => rate_id,
@@ -308,6 +297,27 @@ bol_url = ShipHawk::Shipments.get_bol_url('1019314')
 tracking = ShipHawk::Shipments.get_tracking('1019314')
 notes = ShipHawk::Shipments.get_notes('1019314')
 address_labels = ShipHawk::Shipments.get_address_labels('1019314')
+
+# update a shipment (after editing shipment params, pass in the entire shipment object)
+
+shipment = ShipHawk::Shipments.find('1019314') # get shipment to update
+shipment.details.special_request = 'handle with care'  # edit shipment params
+shipment.details.xid = 'Z123123123'
+shipment.pickup.address.state = 'NY'
+updated_shipment = ShipHawk::Shipments.update('1019165', shipment) # update shipment
+
+#Cancel a shipment
+cancel_shipment = ShipHawk::Shipments.cancel('1019164')
+
+# check to see if shipment has been canceled
+status = ShipHawk::Shipments.find('1019164').details.status
+
+# bulk updates the status of 1 or more shipments, use one of the following statuses below
+# [ :ordered, :confirmed, :scheduled_for_pickup, :agent_prep, :ready_for_carrier_pickup, :in_transit, :delivered, :exception ]
+
+bulk_update_status = ShipHawk::Shipments.update_statuses(:shipment_ids=>[1019165, 1019166],:status=> :ready_for_carrier_pickup)
+
+# Note, you cannot update the status of a shipment that has already been cancelled.
 ```
 
 And 20+ more cool things to do with shipments, see here: **[Shipments End Points](https://github.com/ShipHawk/shiphawk-ruby/blob/superior_branch/lib/shiphawk/api/shipments.rb)**

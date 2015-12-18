@@ -2,7 +2,7 @@ module ShipHawk
   module ApiClient
     extend self
 
-    FORMAT = 'x-www-form-urlencoded'
+    @@format = 'x-www-form-urlencoded'
     USER_AGENT = "ShipHawk/#{ShipHawk::Configuration.api_version} RubyClient/#{ShipHawk::Configuration.client_version}"
 
 
@@ -12,7 +12,7 @@ module ShipHawk
       raise Error.new('No API key provided.') unless api_key
       params = ShipHawk::Util.objects_to_ids(params)
       url = ShipHawk::Configuration.base_url + url
-
+      payload = nil
       case method.to_s.downcase.to_sym
         when :get, :head, :delete
           # Make params into GET parameters
@@ -33,10 +33,9 @@ module ShipHawk
       default_headers = {
           :user_agent => USER_AGENT,
           :authorization => "Bearer #{api_key}",
-          :content_type =>  "application/#{FORMAT.downcase}",
+          :content_type =>  "application/#{@@format.downcase}",
       }
       headers = default_headers.merge(headers)
-      puts headers
       opts = Configuration.http_config.merge(
           {
               :method => method,
@@ -73,7 +72,6 @@ module ShipHawk
       rescue MultiJson::DecodeError
         raise Error.new("Invalid response object from API, unable to decode.", response.code, response.body)
       end
-
       [response_json, api_key]
     end
 
