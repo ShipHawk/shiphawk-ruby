@@ -422,8 +422,8 @@ Track a Shipment
 ```ruby
 # trak by carrier code and tracking number
 tracking_info = ShipHawk::Public.track(
-	:code => 'mxd',
-	:tracking_number => '3434343434'
+	:code => 'daylight',
+	:tracking_number => '1231231231'
 )
 
 # track by shipment id
