@@ -33,7 +33,7 @@ module ShipHawk
       begin
         response = RestClient.put("#{api_base}/shipments/#{shipment_id}?api_key=#{api_key}", params.to_json, :content_type => :json, :accept => :json)
         puts "Response status: #{response.code}"
-        self.find(shipment_id) # get updated shipment after update
+        JSON.parse(response) if response
       rescue => e
         JSON.parse(e.response) if e
       end
@@ -77,6 +77,23 @@ module ShipHawk
       end
     end
 
+    # Subscribe to status updates for a shipment
+    # requires :id, type: Integer
+    # requires :callback_url, type: String
+    # optional :events, type: Array, default: []
+
+    def self.subscribe(shipment_id, params)
+      api_key = ShipHawk.configure.api_key
+      api_base = ShipHawk.configure.base_url
+      response = RestClient.put("#{api_base}/shipments/#{shipment_id}/tracking?api_key=#{api_key}", params.to_json, :content_type => :json, :accept => :json)
+      begin
+        puts "Response status: #{response.code}"
+        JSON.parse(response) if response
+      rescue => e
+        JSON.parse(e.response) if e
+      end
+    end
+
     # get a shipment's BOL pdf url
     def self.get_bol_url(shipment_id)
       response, api_key = ShipHawk::ApiClient.request(:get, "/shipments/#{shipment_id}/bol", @api_key)
@@ -108,6 +125,12 @@ module ShipHawk
     end
 
     # dispatch a shipment
+
+    # requires :id, type: Integer, documentation: {type: 'integer'}
+    # requires :pickup_start_time, type: DateTime, documentation: {type: 'datetime'}
+    # requires :pickup_end_time, type: DateTime, documentation: {type: 'datetime'}
+    # optional :dispatch_instructions, type: String, documentation: {type: 'string'}
+
     def self.dispatch(shipment_id)
       response, api_key = ShipHawk::ApiClient.request(:post, "/shipments/#{shipment_id}/dispatches", @api_key)
       ShipHawk::Util::convert_to_ShipHawk_object(response, api_key) if response

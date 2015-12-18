@@ -293,8 +293,10 @@ paginated  = ShipHawk::Items.all(:page => 1, :per_page => 100)
 all_my_shipments = ShipHawk::Shipments.all
 paginated = ShipHawk::Shipments.all(:page => 1, :per_page => 10)
 shipment_by_id = ShipHawk::Shipments.find('1019314')
-tracking = ShipHawk::Shipments.get_tracking('1019314')
 notes = ShipHawk::Shipments.get_notes('1019314')
+
+# retrieve the current status of a shipment
+tracking = ShipHawk::Shipments.get_tracking('1019314')
 
 # NOTE: small parcel shipments do not have address labels or bols
 bol_url = ShipHawk::Shipments.get_bol_url('1019314')
@@ -335,6 +337,13 @@ ShipHawk::Dispatches.build(
 )
 ```
 
+#### Shipment WebHooks
+
+```ruby
+# Subscribe to status updates for a shipment
+subscribe = ShipHawk::Shipments.subscribe('1019314', :callback_url => 'https://customer.com/api/shipment_status?api_key=3873')
+
+```
 #### Network Locations
 
 **[Network Locations End Points](https://github.com/ShipHawk/shiphawk-ruby/blob/superior_branch/lib/shiphawk/api/network_locations.rb)**
