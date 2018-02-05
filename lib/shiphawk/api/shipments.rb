@@ -17,6 +17,10 @@ module Shiphawk
         entity_request_with_id shipments_path, shipment_id
       end
 
+      def shipments_labels shipment_id
+        get_request shipments_path("#{shipment_id}/labels"), {}
+      end
+
       def shipments_bol shipment_id
         get_request shipments_path("#{shipment_id}/bol"), {}
       end
